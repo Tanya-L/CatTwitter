@@ -1,33 +1,36 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import "./tweetBox.css";
-import { Avatar, Button } from "@material-ui/core";
+import {Avatar, Button} from "@material-ui/core";
+import avatar from "../Profile/avatar.jpg";
 // import db from "./firebase";
+import ImageIcon from '@material-ui/icons/Image';
+import GifIcon from '@material-ui/icons/Gif';
+import EqualizerIcon from '@material-ui/icons/Equalizer';
+import MoodIcon from '@material-ui/icons/Mood';
+import EventIcon from '@material-ui/icons/Event';
 
 function TweetBox() {
     const [tweetMessage, setTweetMessage] = useState("");
-    const [tweetImage, setTweetImage] = useState("");
 
-    // const sendTweet = (e) => {
-    //     e.preventDefault();
-    //
+    const sendTweet = (e) => {
+        e.preventDefault();
+
     //     db.collection("posts").add({
     //         displayName: " ",
     //         username: "",
     //         verified: true,
     //         text: tweetMessage,
-    //         image: tweetImage,
     //         avatar:
     //             ""});
     //
     //     setTweetMessage("");
-    //     setTweetImage("");
-    // };
+    };
 
     return (
         <div className="tweetBox">
             <form>
                 <div className="tweetBox__input">
-                    <Avatar src="" />
+                    <Avatar src={avatar}/>
                     <input
                         onChange={(e) => setTweetMessage(e.target.value)}
                         value={tweetMessage}
@@ -35,21 +38,22 @@ function TweetBox() {
                         type="text"
                     />
                 </div>
-                <input
-                    value={tweetImage}
-                    onChange={(e) => setTweetImage(e.target.value)}
-                    className="tweetBox__imageInput"
-                    // placeholder="Optional: "
-                    type="text"
-                />
-
-                <Button
-                    // onClick={this.handelSubmit}
-                    type="submit"
-                    className="tweetBox__tweetButton"
-                >
-                    Tweet
-                </Button>
+                <div className="tweetBox__footer">
+                    <dib className="tweetBox__icons">
+                        <ImageIcon/>
+                        <GifIcon/>
+                        <EqualizerIcon/>
+                        <MoodIcon/>
+                        <EventIcon/>
+                    </dib>
+                    <Button
+                        onClick={sendTweet}
+                        type="submit"
+                        className="tweetBox__tweetButton"
+                    >
+                        Tweet
+                    </Button>
+                </div>
             </form>
         </div>
     );

@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import TweetBox from "./TweetBox";
 // import Post from "../Posts/Post";
 import "./tweets.css";
 // import db from "./firebase";
-// import FlipMove from "react-flip-move";
+import FlipMove from "react-flip-move";
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 
 function Tweets() {
     const [
-        // posts, setPosts
+        posts, setPosts
     ] = useState([]);
 
     // useEffect(() => {
@@ -21,24 +21,24 @@ function Tweets() {
         <div className="tweet">
             <div className="tweet__header">
                 <h2>Home</h2>
-                <StarBorderIcon />
+                <StarBorderIcon/>
             </div>
 
-            <TweetBox />
+            <TweetBox/>
 
-            {/*<FlipMove>*/}
-            {/*    {posts.map((post) => (*/}
-            {/*        <Post*/}
-            {/*            key={post.text}*/}
-            {/*            displayName={post.displayName}*/}
-            {/*            username={post.username}*/}
-            {/*            verified={post.verified}*/}
-            {/*            text={post.text}*/}
-            {/*            avatar={post.avatar}*/}
-            {/*            image={post.image}*/}
-            {/*        />*/}
-            {/*    ))}*/}
-            {/*</FlipMove>*/}
+            <FlipMove>
+                {/*    {posts.map((post) => (*/}
+                {/*<Post*/}
+                {/*    key={post.text}*/}
+                {/*    displayName={post.displayName}*/}
+                {/*    username={post.username}*/}
+                {/*    verified={post.verified}*/}
+                {/*    text={post.text}*/}
+                {/*    avatar={post.avatar}*/}
+                {/*    image={post.image}*/}
+                {/*/>*/}
+                {/*    ))}*/}
+            </FlipMove>
         </div>
     );
 }

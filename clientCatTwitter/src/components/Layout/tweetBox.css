@@ -35,6 +35,30 @@
     border-radius: 30px !important;
     width: 80px;
     height: 40px !important;
-    margin-top: 20px !important;
+    /*margin-top: 0px !important;*/
     margin-left: auto !important;
+}
+
+.tweetBox__icons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    color: #50b7f5;
+    padding: 10px;
+}
+
+.tweetBox__icons:hover {
+    background-color: #e8f5fe;
+    border-radius: 30px;
+    color: var(--twitter-color);
+    transition: color 100ms ease-out;
+}
+
+.tweetBox__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 60px;
+    padding: 10px;
 }
