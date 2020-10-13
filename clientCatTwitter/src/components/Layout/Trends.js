@@ -30,7 +30,6 @@ function Trends() {
 
                 <TwitterShareButton
                     url={"https://facebook.com/tanya.lytovchenko"}
-                    // options={{ text: "#reactjs is awesome", via: "cleverqazi" }}
                 />
             </div>
         </div>

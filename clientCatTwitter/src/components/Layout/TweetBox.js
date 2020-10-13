@@ -11,8 +11,8 @@ function TweetBox() {
     //     e.preventDefault();
     //
     //     db.collection("posts").add({
-    //         displayName: "Rafeh Qazi",
-    //         username: "cleverqazi",
+    //         displayName: " ",
+    //         username: "",
     //         verified: true,
     //         text: tweetMessage,
     //         image: tweetImage,
@@ -39,7 +39,7 @@ function TweetBox() {
                     value={tweetImage}
                     onChange={(e) => setTweetImage(e.target.value)}
                     className="tweetBox__imageInput"
-                    // placeholder="Optional: Enter image URL"
+                    // placeholder="Optional: "
                     type="text"
                 />
 
