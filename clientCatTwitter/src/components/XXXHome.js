@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import ListPost from './Posts/ListPost'
+import ListPost from './Posts/XXXListPost'
 import Login from './Auth/Login'
 
-class Home extends Component {
+class XXXHome extends Component {
 
     render() {
         const {isAuthenticated} = this.props
@@ -19,4 +19,4 @@ const mapStateToProps = (state) => ({
       isAuthenticated: !!state.auth.isAuthenticated
 })
 
-export default connect(mapStateToProps)(Home)
+export default connect(mapStateToProps)(XXXHome)

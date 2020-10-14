@@ -1,15 +1,15 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import Switch from '@material-ui/core/Switch'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 
 import AddPost from './XXXAddPost'
 import Post from './Post'
-import { connect } from 'react-redux'
-import { getPosts, getPostsByFollowingUsers } from '../../actions/postActions'
+import {connect} from 'react-redux'
+import {getPosts, getPostsByFollowingUsers} from '../../actions/postActions'
 import LoadingPosts from './LoadingPosts'
 
 
-class ListPost extends Component {
+class XXXListPost extends Component {
     constructor (props) {
         super(props)
 
@@ -21,7 +21,7 @@ class ListPost extends Component {
     }
 
     handleChange(event) {
-        this.setState({ allPosts: event.target.checked })
+        this.setState({allPosts: event.target.checked})
     }
 
     componentDidMount() {
@@ -62,4 +62,4 @@ const mapStateToProps = (state) => ({
     loading: state.post.loading
 })
 
-export default connect(mapStateToProps, { getPosts, getPostsByFollowingUsers })(ListPost)
+export default connect(mapStateToProps, { getPosts, getPostsByFollowingUsers })(XXXListPost)

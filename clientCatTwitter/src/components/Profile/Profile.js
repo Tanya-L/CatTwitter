@@ -13,6 +13,7 @@ import {
 } from '../../actions/profileActions'
 import Post from '../Posts/Post'
 import LoadingPosts from '../Posts/LoadingPosts'
+import PostFeed from "../Posts/PostFeed";
 
 const styles = {
     paper: {
@@ -145,9 +146,17 @@ class Profile extends Component {
         }
 
         return (
-            <div>
+            <div className="tweet">
+                <div>
+                    ⬅ Back️
+                </div>
+
+                {/* ------ Show profile or loading animation ------*/}
                 {loadingProfile ? <div>Loading</div> : profileInfo}
-                {loadingPosts ? <LoadingPosts/> : items}
+
+                {/* ------ Show posts or loading animation ------*/}
+                {/*{loadingPosts ? <LoadingPosts/> : items}*/}
+                <PostFeed userFeed={this.props.match.params.userId} />
             </div>
         )
     }
