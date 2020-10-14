@@ -78,7 +78,7 @@ class Register extends Component {
                         error={errors.email ? true : false}
                     />
                     <TextField
-                        label="Login"
+                        label="Choose Display name"
                         type="text"
                         name="login"
                         value={this.state.login}
@@ -108,7 +108,7 @@ class Register extends Component {
                         error={errors.password2 ? true : false}
                     />
                     <TextField
-                        label="Tel more about yourself"
+                        label="Tell more about yourself"
                         type="text"
                         name="bio"
                         value={this.state.bio}
@@ -117,16 +117,16 @@ class Register extends Component {
                         // helperText={errors.password2 ? errors.password2 : ''}
                         // error={errors.password2 ? true : false }
                     />
-                    <TextField
-                        label="Choose name"
-                        type="text"
-                        name="name"
-                        value={this.state.name}
-                        onChange={this.handleChange}
-                        className={classes.textField}
-                        // helperText={errors.password2 ? errors.password2 : ''}
-                        // error={errors.password2 ? true : false }
-                    />
+                    {/*<TextField*/}
+                    {/*    label="Choose name"*/}
+                    {/*    type="text"*/}
+                    {/*    name="name"*/}
+                    {/*    value={this.state.name}*/}
+                    {/*    onChange={this.handleChange}*/}
+                    {/*    className={classes.textField}*/}
+                    {/*    // helperText={errors.password2 ? errors.password2 : ''}*/}
+                    {/*    // error={errors.password2 ? true : false }*/}
+                    {/*/>*/}
                     <div className={classes.btnBlock}>
                         <Button variant="outlined" type="submit">
                             Submit

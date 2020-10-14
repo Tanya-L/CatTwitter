@@ -130,6 +130,7 @@ class Profile extends Component {
                 <Paper className={classes.paper}>
                     <h1 className={classes.login}>{profile.login}</h1>
                     <div className={classes.email}>{profile.email}</div>
+                    <div className={classes.bio}>{profile.bio}</div>
                     <div className={classes.detailsBlock}>
                         <div className={classes.detail}>
                             {items.length}
@@ -178,7 +179,8 @@ const mapStateToProps = (state) => ({
     profile: state.profile.user,
     loadingProfile: state.profile.loading,
     auth: state.auth,
-    user: state.auth.user
+    user: state.auth.user,
+    bio: state.auth.bio
 })
 
 export default connect(mapStateToProps, {
