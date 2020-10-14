@@ -16,35 +16,37 @@ import UserPanel from "./UserPanel";
 import {Route} from "react-router-dom";
 import Login from "../Auth/Login";
 
-function LeftSidebar() {
-    return (
-        <div className="sidebar">
-            <div>
-                <TwitterIcon className="sidebar__twitterIcon"/>
-                <PetsIcon className="sidebar__PetsIcon"/>
+class LeftSidebar extends React.Component {
+    render() {
+        return (
+            <div className="sidebar">
+                <div>
+                    <a href="/"><TwitterIcon className="sidebar__twitterIcon"/></a>
+                    <PetsIcon className="sidebar__PetsIcon"/>
+                </div>
+
+                <a href="/"><SidebarOption active Icon={HomeIcon} text="Home"/></a>
+                <SidebarOption Icon={SearchIcon} text="Explore"/>
+                <SidebarOption Icon={NotificationsNoneIcon} text="Notifications"/>
+                <SidebarOption Icon={MailOutlineIcon} text="Messages"/>
+                <SidebarOption Icon={BookmarkBorderIcon} text="Bookmarks"/>
+                <SidebarOption Icon={ListAltIcon} text="Lists"/>
+                <SidebarOption Icon={PermIdentityIcon} text="Profile"/>
+                <SidebarOption Icon={MoreHorizIcon} text="More"/>
+
+                {/* Button -> Tweet */}
+                <Button variant="outlined" className="sidebar__tweet" fullWidth>
+                    Tweet
+                </Button>
+                <div className="userPanel">
+                    <UserPanel/>
+                    <Route path="/login"><Login/></Route>
+                </div>
+
+                {/*<Profile />*/}
             </div>
-
-            <SidebarOption active Icon={HomeIcon} text="Home"/>
-            <SidebarOption Icon={SearchIcon} text="Explore"/>
-            <SidebarOption Icon={NotificationsNoneIcon} text="Notifications"/>
-            <SidebarOption Icon={MailOutlineIcon} text="Messages"/>
-            <SidebarOption Icon={BookmarkBorderIcon} text="Bookmarks"/>
-            <SidebarOption Icon={ListAltIcon} text="Lists"/>
-            <SidebarOption Icon={PermIdentityIcon} text="Profile"/>
-            <SidebarOption Icon={MoreHorizIcon} text="More"/>
-
-            {/* Button -> Tweet */}
-            <Button variant="outlined" className="sidebar__tweet" fullWidth>
-                Tweet
-            </Button>
-            <div className="userPanel">
-                <UserPanel/>
-                <Route path="/login"><Login/></Route>
-            </div>
-
-            {/*<Profile />*/}
-        </div>
-    );
+        );
+    }
 }
 
 export default LeftSidebar;

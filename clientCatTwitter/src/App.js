@@ -37,7 +37,7 @@ class App extends Component {
                             <Route exact path="/" component={Home}/>
                             {/*<Route path="/login" component={Login}/>*/}
                             <Route path="/register" component={Register}/>
-                            <Route path="/profile/:userId" component={Profile}/>
+                            {/*<Route path="/profile/:userId" component={Profile}/>*/}
                             <Route path="/search" component={Search}/>
                             <Route component={NotFound}/>
                         </Switch></Main>
