@@ -6,67 +6,61 @@ import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
 import RepeatIcon from "@material-ui/icons/Repeat";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import PublishIcon from "@material-ui/icons/Publish";
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import {connect} from "react-redux";
+import {logoutUser} from "../../actions/authActions";
 
-const Post = forwardRef(
-    ({displayName, user, verified, text, image, avatar, createdAt}, ref) => {
+class Post extends React.Component {
+    constructor(props) {
+        super(props);
+        this.setState({})
+    }
+
+    // ({displayName, user, verified, text, image, avatar, createdAt}, ref) => {
+    render() {
         return (
-            <div className="post" ref={ref}>
+            <div className="post">
                 <div className="post__avatar">
-                    <Avatar src={avatar}/>
+                    <Avatar src={this.props.avatar}/>
                 </div>
                 <div className="post__body">
                     <div className="post__header">
                         <div className="post__headerText">
-                            <a href={("/profile/" + user.id)}>
+                            <a href={("/profile/" + this.props.user.id)}>
                                 <h3>
-                                    {displayName}{" "}
-                                    <span className="post__headerSpecial">
-                    {verified && <VerifiedUserIcon className="post__badge"/>} @{user.login}
-                </span>
+                                {this.props.displayName} {this.props.user.name}
+                                <span className="post__headerSpecial">
+                                {/*{this.props.verified && <VerifiedUserIcon className="post__badge"/>}*/}
+                                @{this.props.user.login}
+                                </span>
                                 </h3>
                             </a>
                         </div>
                         <div className="post__headerDescription">
-                            <p>{createdAt}</p>
-                            <p>{text}</p>
+                            <p>{this.props.createdAt}</p>
+                            <p>{this.props.text}</p>
                         </div>
                     </div>
-                    <img src={image} alt=""/>
+                    <img src={this.props.image} alt=""/>
                     <div className="post__footer">
                         <ChatBubbleOutlineIcon fontSize="small"/>
                         <RepeatIcon fontSize="small"/>
                         <FavoriteBorderIcon fontSize="small"/>
                         <PublishIcon fontSize="small"/>
+                        {this.props.user.id == this.props.loggedInUser._id
+                            ? <DeleteForeverIcon fontSize="small"/>
+                            : ""}
                     </div>
                 </div>
             </div>
         );
     }
-);
+}
 
 
-// class Post extends Component {
-//     render () {
-//         const { classes, post } = this.props
-//         return (
-//             <Paper className={classes.paper}>
-//                 <div
-//                     className={classes.avatar}
-//                     style={{
-//                         backgroundColor: `#${post.user.id.slice(post.user.id.length - 3)}`
-//                     }}
-//                 />
-//                 <div>
-//                     <h3 className={classes.login}>
-//                         <Link to={`/profile/${post.user.id}`}>{post.user.login}</Link>
-//                         <span className={classes.time}>{(new Date(post.createdAt)).toLocaleString()}</span>
-//                     </h3>
-//                     {post.text}
-//                 </div>
-//             </Paper>
-//         )
-//     }
-// }
+const mapStateToProps = (state) => ({
+    isAuthenticated: state.auth.isAuthenticated,
+    loggedInUser: state.auth.user
+})
 
-
-export default Post
+export default connect(mapStateToProps, {})(Post)

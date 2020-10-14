@@ -2,7 +2,8 @@ import React, {Component} from 'react'
 import {withStyles} from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import Button from '@material-ui/core/Button'
-
+import "../Layout/tweetBox.css";
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import {connect} from 'react-redux'
 import {
     followUser,
@@ -12,12 +13,13 @@ import {
     unfollowUser
 } from '../../actions/profileActions'
 import Post from '../Posts/Post'
-import LoadingPosts from '../Posts/LoadingPosts'
+// import LoadingPosts from '../Posts/XXXLoadingPosts'
 import PostFeed from "../Posts/PostFeed";
+import EditIcon from '@material-ui/icons/Edit';
 
 const styles = {
     paper: {
-        padding: 10
+        padding: 20,
     },
     login: {},
     email: {
@@ -28,7 +30,7 @@ const styles = {
         display: 'flex'
     },
     detail: {
-        marginRight: 5,
+        marginRight: 25,
         fontWeight: 'bold'
     },
     detailTitle: {
@@ -38,15 +40,15 @@ const styles = {
         fontWeight: 'normal'
     },
     btnBlock: {
-        width: '100%',
+        width: '70%',
         textAlign: 'right'
     },
     btnFollow: {
-        backgroundColor: '#9400D3',
+        backgroundColor: '#50b7f5',
         color: 'white',
         '&:hover': {
-            color: '#9400D3',
-            borderColor: '#9400D3',
+            color: '#50b7f5',
+            borderColor: '#50b7f5',
             backgroundColor: 'white'
         }
     }
@@ -84,7 +86,7 @@ class Profile extends Component {
     render() {
         const {
             classes,
-            loadingPosts,
+            // loadingPosts,
             loadingProfile,
             list,
             auth,
@@ -140,6 +142,10 @@ class Profile extends Component {
                             <span className={classes.detailTitle}>following</span>
                         </div>
                         {followBtns}
+                        <div>
+                            {/*if own profile = show edit, else icon hidden? and show followBtns */}
+                            <EditIcon/>
+                        </div>
                     </div>
                 </Paper>
             )
@@ -147,8 +153,8 @@ class Profile extends Component {
 
         return (
             <div className="tweet">
-                <div>
-                    ⬅ Back️
+                <div className="tweet__header">
+                    <ArrowBackIcon/>
                 </div>
 
                 {/* ------ Show profile or loading animation ------*/}
@@ -156,7 +162,7 @@ class Profile extends Component {
 
                 {/* ------ Show posts or loading animation ------*/}
                 {/*{loadingPosts ? <LoadingPosts/> : items}*/}
-                <PostFeed userFeed={this.props.match.params.userId} />
+                <PostFeed userFeed={this.props.match.params.userId}/>
             </div>
         )
     }

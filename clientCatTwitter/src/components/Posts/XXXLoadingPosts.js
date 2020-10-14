@@ -13,10 +13,10 @@ const styles = {
         color: '#1da1f2'
     }
 }
-const LoadingPosts = ({ classes }) => (
+const XXXLoadingPosts = ({ classes }) => (
     <div className={classes.load}>
         <CircularProgress className={classes.loadIcon}/>
     </div>
 )
 
-export default withStyles(styles)(LoadingPosts)
+export default withStyles(styles)(XXXLoadingPosts)

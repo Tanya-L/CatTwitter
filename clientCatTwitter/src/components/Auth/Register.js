@@ -2,11 +2,11 @@ import React, {Component} from "react";
 import TextField from '@material-ui/core/TextField'
 import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
-import { withStyles } from '@material-ui/core/styles'
-import { withRouter } from 'react-router-dom'
-import { connect } from 'react-redux'
+import {withStyles} from '@material-ui/core/styles'
+import {withRouter} from 'react-router-dom'
+import {connect} from 'react-redux'
 
-import { registerUser } from '../../actions/authActions'
+import {registerUser} from '../../actions/authActions'
 
 const styles = {
     textField: {
@@ -21,44 +21,51 @@ const styles = {
 }
 
 class Register extends Component {
-    constructor (props) {
+    constructor(props) {
         super(props)
         this.state = {
             email: '',
             login: '',
             password: '',
             password2: '',
-            errors: {}
+            errors: {},
+            bio: '',
+            name: ''
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
     }
+
     componentWillReceiveProps(nextProps) {
         if (nextProps.errors) {
-            this.setState({ errors: nextProps.errors })
+            this.setState({errors: nextProps.errors})
         }
     }
-    handleChange (e) {
-        this.setState({ [e.target.name]: e.target.value })
+
+    handleChange(e) {
+        this.setState({[e.target.name]: e.target.value})
     }
-    handleSubmit (e) {
+
+    handleSubmit(e) {
         e.preventDefault()
         const userData = {
             email: this.state.email,
             login: this.state.login,
             password: this.state.password,
-            password2: this.state.password2
+            password2: this.state.password2,
+            bio: this.state.bio,
+            name: this.state.name
         }
 
         this.props.registerUser(userData, this.props.history)
     }
 
-    render () {
-        const { classes } = this.props;
-        const { errors } = this.state
+    render() {
+        const {classes} = this.props;
+        const {errors} = this.state
 
         return (
-        <Paper style={{ padding: 15}}>
+            <Paper style={{padding: 15}}>
                 <form onSubmit={this.handleSubmit}>
                     <TextField
                         type="email"
@@ -68,7 +75,7 @@ class Register extends Component {
                         onChange={this.handleChange}
                         name="email"
                         helperText={errors.email ? errors.email : ''}
-                        error={errors.email ? true : false }
+                        error={errors.email ? true : false}
                     />
                     <TextField
                         label="Login"
@@ -78,7 +85,7 @@ class Register extends Component {
                         onChange={this.handleChange}
                         className={classes.textField}
                         helperText={errors.login ? errors.login : ''}
-                        error={errors.login ? true : false }
+                        error={errors.login ? true : false}
                     />
                     <TextField
                         label="Password"
@@ -88,7 +95,7 @@ class Register extends Component {
                         onChange={this.handleChange}
                         className={classes.textField}
                         helperText={errors.password ? errors.password : ''}
-                        error={errors.password ? true : false }
+                        error={errors.password ? true : false}
                     />
                     <TextField
                         label="Repeat password"
@@ -98,7 +105,27 @@ class Register extends Component {
                         onChange={this.handleChange}
                         className={classes.textField}
                         helperText={errors.password2 ? errors.password2 : ''}
-                        error={errors.password2 ? true : false }
+                        error={errors.password2 ? true : false}
+                    />
+                    <TextField
+                        label="Tel more about yourself"
+                        type="text"
+                        name="bio"
+                        value={this.state.bio}
+                        onChange={this.handleChange}
+                        className={classes.textField}
+                        // helperText={errors.password2 ? errors.password2 : ''}
+                        // error={errors.password2 ? true : false }
+                    />
+                    <TextField
+                        label="Choose name"
+                        type="text"
+                        name="name"
+                        value={this.state.name}
+                        onChange={this.handleChange}
+                        className={classes.textField}
+                        // helperText={errors.password2 ? errors.password2 : ''}
+                        // error={errors.password2 ? true : false }
                     />
                     <div className={classes.btnBlock}>
                         <Button variant="outlined" type="submit">
@@ -108,13 +135,13 @@ class Register extends Component {
                 </form>
             </Paper>
         )
-     }
+    }
 }
 
 const mapStateToProps = (state) => ({
     errors: state.errors
 })
 
-export default connect(mapStateToProps, { registerUser })(withRouter(withStyles(styles)(Register)))
+export default connect(mapStateToProps, {registerUser})(withRouter(withStyles(styles)(Register)))
 
 

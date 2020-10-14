@@ -9,13 +9,13 @@ const validateLoginInput = require('../validation/login')
 
 router.route('/register')
     .post((req, res) => {
-        const { isValid, errors } = validateRegisterInput(req.body)
+        const {isValid, errors} = validateRegisterInput(req.body)
 
         if (!isValid) {
             return res.status(404).json(errors)
         }
 
-        User.findOne({ email: req.body.email })
+        User.findOne({email: req.body.email})
             .then(user => {
                 if (user) {
                     errors.email = 'Email was used!'
@@ -27,7 +27,9 @@ router.route('/register')
                         const newUser = new User({
                             email: req.body.email,
                             login: req.body.login,
-                            password: hash
+                            password: hash,
+                            bio: req.body.bio,
+                            name: req.body.name
                         })
 
                         newUser.save()
@@ -40,19 +42,19 @@ router.route('/register')
 
 router.route('/login')
     .post((req, res) => {
-        const { errors, isValid } = validateLoginInput(req.body)
+        const {errors, isValid} = validateLoginInput(req.body)
 
         if (!isValid) {
             return res.status(404).json(errors)
         }
 
-        User.findOne({ email: req.body.email })
+        User.findOne({email: req.body.email})
             .then(user => {
                 if (user) {
                     bcrypt.compare(req.body.password, user.password)
                         .then(isMatch => {
                             if (isMatch) {
-                                const token = jwt.sign({ id: user._id }, process.env.SECRET, { expiresIn: '1d' }, function (err, token) {
+                                const token = jwt.sign({id: user._id}, process.env.SECRET, {expiresIn: '1d'}, function (err, token) {
                                     return res.json({
                                         success: true,
                                         token: token
@@ -68,36 +70,38 @@ router.route('/login')
                     return res.status(404).json(errors)
                 }
             })
-     })
+    })
 
 router.route('/')
-    .get( passport.authenticate('jwt', { session: false }),(req, res) => {
+    .get(passport.authenticate('jwt', {session: false}), (req, res) => {
         res.json({
             _id: req.user._id,
             email: req.user.email,
             login: req.user.login,
             followers: req.user.followers,
-            following: req.user.following
+            following: req.user.following,
+            bio: req.user.bio,
+            name: req.user.name
         })
     })
 
 router.route('/follow')
     .post(
-        passport.authenticate('jwt', { session: false }),
+        passport.authenticate('jwt', {session: false}),
         (req, res) => {
             User.findOneAndUpdate({
                     _id: req.user.id
                 }, {
-                    $push: { following: req.body.userId }
+                    $push: {following: req.body.userId}
                 },
-                { new: true })
+                {new: true})
                 .then(user => {
                     User.findOneAndUpdate({
                         _id: req.body.userId
                     }, {
-                        $push: { followers: req.user.id }
-                    }, { new: true})
-                        .then(user => res.json({ userId: req.body.userId }))
+                        $push: {followers: req.user.id}
+                    }, {new: true})
+                        .then(user => res.json({userId: req.body.userId}))
                         .catch(err => console.log(err))
                 })
                 .catch(err => console.log(err))
@@ -105,20 +109,20 @@ router.route('/follow')
 
 router.route('/unfollow')
     .post(
-        passport.authenticate('jwt', { session: false }),
+        passport.authenticate('jwt', {session: false}),
         (req, res) => {
             User.findOneAndUpdate({
                 _id: req.user.id
             }, {
-                $pull: { following: req.body.userId }
-            }, { new: true })
+                $pull: {following: req.body.userId}
+            }, {new: true})
                 .then(user => {
                     User.findOneAndUpdate({
                         _id: req.body.userId
                     }, {
-                        $pull: { followers: req.user.id }
-                    }, { new: true })
-                        .then(user => res.json({ userId: req.body.userId }))
+                        $pull: {followers: req.user.id}
+                    }, {new: true})
+                        .then(user => res.json({userId: req.body.userId}))
                         .catch(err => console.log(err))
                 })
                 .catch(err => console.log(err))
@@ -134,8 +138,8 @@ router.route('/search')
                 {login: req.body.text}
             ]
         })
-            .then(user => res.json({ userId: user._id }))
-            .catch(err => res.status(404).json({ msg: 'User not found'}))
+            .then(user => res.json({userId: user._id}))
+            .catch(err => res.status(404).json({msg: 'User not found'}))
     })
 
 router.route('/:id')
@@ -148,10 +152,12 @@ router.route('/:id')
                         email: user.email,
                         login: user.login,
                         followers: user.followers,
-                        following: user.following
+                        following: user.following,
+                        bio: user.bio,
+                        name: user.name
                     })
                 } else {
-                    return res.status(404).json({ msg: 'User not found'})
+                    return res.status(404).json({msg: 'User not found'})
                 }
             })
             .catch(err => console.log(err))

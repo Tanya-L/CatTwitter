@@ -15,7 +15,13 @@ const userSchema = new Schema({
         type: String
     },
     followers: [],
-    following: []
+    following: [],
+    bio: {
+        type: String
+    },
+    name: {
+        type: String
+    }
 })
 
 module.exports = mongoose.model('User', userSchema)

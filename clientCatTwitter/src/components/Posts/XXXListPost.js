@@ -6,7 +6,7 @@ import AddPost from './XXXAddPost'
 import Post from './Post'
 import {connect} from 'react-redux'
 import {getPosts, getPostsByFollowingUsers} from '../../actions/postActions'
-import LoadingPosts from './LoadingPosts'
+import LoadingPosts from './XXXLoadingPosts'
 
 
 class XXXListPost extends Component {

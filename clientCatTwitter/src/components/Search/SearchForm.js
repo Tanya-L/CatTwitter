@@ -76,6 +76,7 @@ class SearchForm extends Component {
                 </div>
                 <InputBase
                     placeholder="Search Twitter"
+                    // helperText="Try searching for people, topics, or keywords"
                     classes={{
                         root: classes.inputRoot,
                         input: classes.inputInput

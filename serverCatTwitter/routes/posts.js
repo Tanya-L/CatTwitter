@@ -21,6 +21,16 @@ router.route('/add')
                 .catch(err => console.log(err))
         })
 
+router.route('/:postId')
+    .delete(
+        passport.authenticate('jwt', {session: false}),
+        (req, res) => {
+
+            Post.delete()
+                .then(post => res.json(post))
+                .catch(err => console.log(err))
+        })
+
 router.route('/')
     .get((req, res) => {
         Post.find()

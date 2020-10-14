@@ -22,7 +22,7 @@ class LeftSidebar extends React.Component {
             <div className="sidebar">
                 <div>
                     <a href="/"><TwitterIcon className="sidebar__twitterIcon"/></a>
-                    <PetsIcon className="sidebar__PetsIcon"/>
+                    <a href="/"><PetsIcon className="sidebar__PetsIcon"/></a>
                 </div>
 
                 <a href="/"><SidebarOption active Icon={HomeIcon} text="Home"/></a>
@@ -34,7 +34,8 @@ class LeftSidebar extends React.Component {
                 <SidebarOption Icon={PermIdentityIcon} text="Profile"/>
                 <SidebarOption Icon={MoreHorizIcon} text="More"/>
 
-                {/* Button -> Tweet */}
+                {/* Button -> Tweet */
+                }
                 <Button variant="outlined" className="sidebar__tweet" fullWidth>
                     Tweet
                 </Button>
@@ -43,7 +44,8 @@ class LeftSidebar extends React.Component {
                     <Route path="/login"><Login/></Route>
                 </div>
 
-                {/*<Profile />*/}
+                {/*<Profile />*/
+                }
             </div>
         );
     }
