@@ -11,10 +11,12 @@ import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
 import ListAltIcon from "@material-ui/icons/ListAlt";
 import PermIdentityIcon from "@material-ui/icons/PermIdentity";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
-import { Button } from "@material-ui/core";
-// import Profile from "../Profile/Profile";
+import {Button} from "@material-ui/core";
+import UserPanel from "./UserPanel";
+import {Route} from "react-router-dom";
+import Login from "../Auth/Login";
 
-function Sidebar() {
+function LeftSidebar() {
     return (
         <div className="sidebar">
             <div>
@@ -22,23 +24,26 @@ function Sidebar() {
                 <PetsIcon className="sidebar__PetsIcon"/>
             </div>
 
-            <SidebarOption active Icon={HomeIcon} text="Home" />
-            <SidebarOption Icon={SearchIcon} text="Explore" />
-            <SidebarOption Icon={NotificationsNoneIcon} text="Notifications" />
-            <SidebarOption Icon={MailOutlineIcon} text="Messages" />
-            <SidebarOption Icon={BookmarkBorderIcon} text="Bookmarks" />
-            <SidebarOption Icon={ListAltIcon} text="Lists" />
-            <SidebarOption Icon={PermIdentityIcon} text="Profile" />
-            <SidebarOption Icon={MoreHorizIcon} text="More" />
+            <SidebarOption active Icon={HomeIcon} text="Home"/>
+            <SidebarOption Icon={SearchIcon} text="Explore"/>
+            <SidebarOption Icon={NotificationsNoneIcon} text="Notifications"/>
+            <SidebarOption Icon={MailOutlineIcon} text="Messages"/>
+            <SidebarOption Icon={BookmarkBorderIcon} text="Bookmarks"/>
+            <SidebarOption Icon={ListAltIcon} text="Lists"/>
+            <SidebarOption Icon={PermIdentityIcon} text="Profile"/>
+            <SidebarOption Icon={MoreHorizIcon} text="More"/>
 
             {/* Button -> Tweet */}
             <Button variant="outlined" className="sidebar__tweet" fullWidth>
                 Tweet
             </Button>
 
+            <UserPanel />
+
+            <Route path="/login"><Login/></Route>
             {/*<Profile />*/}
         </div>
     );
 }
 
-export default Sidebar;
+export default LeftSidebar;

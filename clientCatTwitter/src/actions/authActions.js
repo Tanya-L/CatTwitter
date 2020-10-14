@@ -1,11 +1,11 @@
 import axios from 'axios'
-import { GET_ERRORS, SET_CURRENT_USER } from '../constants'
+import {CLEAR_CURRENT_USER, GET_ERRORS, SET_CURRENT_USER} from '../constants'
 import setAuthHeader from '../utils/setAuthHeader'
 
 export const loginUser = (userData) => dispatch => {
     axios.post('http://localhost:5000/api/users/login', userData)
         .then(res => {
-            const { token } = res.data
+            const {token} = res.data
             localStorage.setItem('jwtToken', token)
             setAuthHeader(token)
             dispatch(getCurrentUser())
@@ -39,8 +39,15 @@ export const setCurrentUser = (data) => {
     }
 }
 
+export const clearCurrentUser = () => {
+    return {
+        type: CLEAR_CURRENT_USER,
+        payload: null
+    }
+}
+
 export const logoutUser = () => dispatch => {
     localStorage.removeItem('jwtToken')
     setAuthHeader()
-    dispatch(setCurrentUser())
+    dispatch(clearCurrentUser())
 }

@@ -1,12 +1,12 @@
-import React, { Component } from 'react'
-import { withStyles } from '@material-ui/core/styles'
+import React, {Component} from 'react'
+import {withStyles} from '@material-ui/core/styles'
 import InputBase from '@material-ui/core/InputBase'
 import SearchIcon from '@material-ui/icons/Search'
-import { fade } from '@material-ui/core/styles/colorManipulator'
-import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
+import {fade} from '@material-ui/core/styles/colorManipulator'
+import {connect} from 'react-redux'
+import {withRouter} from 'react-router-dom'
 
-import { searchUser } from '../../actions/profileActions'
+import {searchUser} from '../../actions/profileActions'
 
 const styles = (theme) => ({
     search: {
@@ -51,13 +51,13 @@ const styles = (theme) => ({
 })
 
 class SearchForm extends Component {
-    constructor (props) {
+    constructor(props) {
         super(props)
 
         this.handleSubmit = this.handleSubmit.bind(this)
     }
 
-    handleSubmit (e) {
+    handleSubmit(e) {
         const searchData = {
             text: e.target.value
         }
@@ -67,12 +67,12 @@ class SearchForm extends Component {
         }
     }
 
-    render () {
-        const { classes } = this.props
+    render() {
+        const {classes} = this.props
         return (
             <div className={classes.search}>
                 <div className={classes.searchIcon}>
-                    <SearchIcon />
+                    <SearchIcon/>
                 </div>
                 <InputBase
                     placeholder="Search user"
@@ -87,4 +87,4 @@ class SearchForm extends Component {
     }
 }
 
-export default connect(null, { searchUser })(withRouter(withStyles(styles)(SearchForm)))
+export default connect(null, {searchUser})(withRouter(withStyles(styles)(SearchForm)))

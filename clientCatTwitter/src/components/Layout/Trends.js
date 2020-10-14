@@ -7,13 +7,13 @@ import {
 } from "react-twitter-embed";
 import SearchIcon from "@material-ui/icons/Search";
 import SettingsIcon from "@material-ui/icons/Settings";
+import SearchForm from "../Search/SearchForm";
 
 function Trends() {
     return (
         <div className="trends">
             <div className="trends__input">
-                <SearchIcon className="trends__searchIcon" />
-                <input placeholder="Search Twitter" type="text" />
+                <SearchForm/>
             </div>
 
             <div className="trends__trendContainer">

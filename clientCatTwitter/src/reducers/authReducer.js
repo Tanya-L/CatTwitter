@@ -1,4 +1,5 @@
 import {
+    CLEAR_CURRENT_USER,
     SET_CURRENT_USER,
     FOLLOW,
     UNFOLLOW
@@ -11,6 +12,12 @@ const initialState = {
 
 export default function (state = initialState, action) {
     switch (action.type) {
+        case CLEAR_CURRENT_USER:
+            return {
+                ...state,
+                isAuthenticated: false,
+                user: null
+            }
         case SET_CURRENT_USER:
             return {
                 ...state,

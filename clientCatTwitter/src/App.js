@@ -3,19 +3,16 @@ import {BrowserRouter, Route, Switch} from "react-router-dom";
 import './App.css';
 import {Provider} from 'react-redux'
 import jwt_decode from 'jwt-decode'
-
 import store from './store'
-
 import Main from './components/Layout/Main'
 import Home from './components/Home'
 import Register from './components/Auth/Register'
-import Login from './components/Auth/Login'
 import Profile from './components/Profile/Profile'
 import NotFound from './components/NotFound'
 import Search from './components/Search/NotFound'
 
 import setAuthHeader from './utils/setAuthHeader'
-import { logoutUser, getCurrentUser } from './actions/authActions'
+import {getCurrentUser, logoutUser} from './actions/authActions'
 
 if (localStorage.getItem('jwtToken')) {
     const currentTime = Date.now() / 1000
@@ -36,16 +33,14 @@ class App extends Component {
             <Provider store={store}>
                 <div>
                     <BrowserRouter>
-                        <Main>
-                            <Switch>
-                                <Route exact path="/" component={Home}/>
-                                <Route path="/login" component={Login}/>
-                                <Route path="/register" component={Register}/>
-                                <Route path="/profile/:userId" component={Profile} />
-                                <Route path="/search" component={Search} />
-                                <Route component={NotFound}/>
-                            </Switch>
-                        </Main>
+                        <Main><Switch>
+                            <Route exact path="/" component={Home}/>
+                            {/*<Route path="/login" component={Login}/>*/}
+                            <Route path="/register" component={Register}/>
+                            <Route path="/profile/:userId" component={Profile}/>
+                            <Route path="/search" component={Search}/>
+                            <Route component={NotFound}/>
+                        </Switch></Main>
                     </BrowserRouter>
                 </div>
             </Provider>

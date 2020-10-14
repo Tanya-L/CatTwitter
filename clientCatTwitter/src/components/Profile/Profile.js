@@ -1,15 +1,15 @@
-import React, { Component } from 'react'
-import { withStyles } from '@material-ui/core/styles'
+import React, {Component} from 'react'
+import {withStyles} from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import Button from '@material-ui/core/Button'
 
-import { connect } from 'react-redux'
+import {connect} from 'react-redux'
 import {
+    followUser,
     getPostsByUserId,
     getUserProfile,
-    followUser,
-    unfollowUser,
-    refreshUserProfile
+    refreshUserProfile,
+    unfollowUser
 } from '../../actions/profileActions'
 import Post from '../Posts/Post'
 import LoadingPosts from '../Posts/LoadingPosts'
@@ -18,9 +18,7 @@ const styles = {
     paper: {
         padding: 10
     },
-    login: {
-
-    },
+    login: {},
     email: {
         color: '#888',
         marginBottom: 10
@@ -54,7 +52,7 @@ const styles = {
 }
 
 class Profile extends Component {
-    constructor (props) {
+    constructor(props) {
         super(props)
 
         this.handleFollow = this.handleFollow.bind(this)
@@ -74,15 +72,15 @@ class Profile extends Component {
         }
     }
 
-    handleFollow (){
+    handleFollow() {
         this.props.followUser(this.props.match.params.userId)
     }
 
-    handleUnfollow () {
+    handleUnfollow() {
         this.props.unfollowUser(this.props.match.params.userId)
     }
 
-    render () {
+    render() {
         const {
             classes,
             loadingPosts,
@@ -140,7 +138,7 @@ class Profile extends Component {
                             {profile.following.length}
                             <span className={classes.detailTitle}>following</span>
                         </div>
-                        { followBtns }
+                        {followBtns}
                     </div>
                 </Paper>
             )
@@ -148,8 +146,8 @@ class Profile extends Component {
 
         return (
             <div>
-                { loadingProfile ? <div>Loading</div> : profileInfo }
-                { loadingPosts ? <LoadingPosts /> : items }
+                {loadingProfile ? <div>Loading</div> : profileInfo}
+                {loadingPosts ? <LoadingPosts/> : items}
             </div>
         )
     }

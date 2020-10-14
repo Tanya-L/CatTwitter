@@ -1,15 +1,13 @@
 import React from "react";
 // import Grid from '@material-ui/core/Grid'
-// import Header from './Header'
-import Sidebar from "./Sidebar";
+import LeftSidebar from "./LeftSidebar";
 import Tweets from "./Tweets";
 import Trends from "./Trends";
 
 const Main = ({children}) => (
     <div>
         <div className="app">
-            {/*<Header/>*/}
-            <Sidebar/>
+            <LeftSidebar/>
             <Tweets/>
             <Trends/>
         </div>
