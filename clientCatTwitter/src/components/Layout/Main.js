@@ -1,14 +1,14 @@
 import React from "react";
 // import Grid from '@material-ui/core/Grid'
 import LeftSidebar from "./LeftSidebar";
-import Tweets from "./Tweets";
+import CentralColumn from "./CentralColumn";
 import Trends from "./Trends";
 
 const Main = ({children}) => (
     <div>
         <div className="app">
             <LeftSidebar/>
-            <Tweets/>
+            <CentralColumn/>
             <Trends/>
         </div>
         {/*<Grid container justify="center">*/}

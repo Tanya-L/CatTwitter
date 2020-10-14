@@ -9,6 +9,7 @@ import EqualizerIcon from '@material-ui/icons/Equalizer';
 import MoodIcon from '@material-ui/icons/Mood';
 import EventIcon from '@material-ui/icons/Event';
 
+// Displays input box with "What's happening" form
 function TweetBox() {
     const [tweetMessage, setTweetMessage] = useState("");
 

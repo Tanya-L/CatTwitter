@@ -4,7 +4,7 @@ const Post = require('../models/Post')
 
 router.route('/add')
     .post(
-        passport.authenticate('jwt', { session: false }),
+        passport.authenticate('jwt', {session: false}),
         (req, res) => {
             const text = req.body.text.trim()
 
@@ -24,27 +24,27 @@ router.route('/add')
 router.route('/')
     .get((req, res) => {
         Post.find()
-            .sort({ createdAt: -1 })
+            .sort({createdAt: -1})
             .then(posts => res.json(posts))
             .catch(err => console.log(err))
     })
 
 router.route('/following')
     .get(
-        passport.authenticate('jwt', { session: false }),
+        passport.authenticate('jwt', {session: false}),
         (req, res) => {
             Post.find({
-                'user.id': { $in: req.user.following }
+                'user.id': {$in: req.user.following}
             })
-                .sort({ createdAt: -1 })
+                .sort({createdAt: -1})
                 .then(posts => res.json(posts))
                 .catch(err => console.log(err))
         })
 
 router.route('/:userId')
     .get((req, res) => {
-        Post.find({ 'user.id': req.params.userId })
-            .sort({ createdAt: -1 })
+        Post.find({'user.id': req.params.userId})
+            .sort({createdAt: -1})
             .then(posts => res.json(posts))
             .catch(err => console.log(err))
     })

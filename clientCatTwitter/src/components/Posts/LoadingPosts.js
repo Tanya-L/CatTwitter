@@ -5,7 +5,7 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 
 const styles = {
     load: {
-        textAlgin: 'center',
+        textAlign: 'center',
         marginTop: 25,
         width: '100%'
     },
