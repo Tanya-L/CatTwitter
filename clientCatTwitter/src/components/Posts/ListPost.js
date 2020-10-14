@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Switch from '@material-ui/core/Switch'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 
-import AddPost from './AddPost'
+import AddPost from './XXXAddPost'
 import Post from './Post'
 import { connect } from 'react-redux'
 import { getPosts, getPostsByFollowingUsers } from '../../actions/postActions'

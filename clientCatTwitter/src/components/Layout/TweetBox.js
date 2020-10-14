@@ -8,23 +8,20 @@ import GifIcon from '@material-ui/icons/Gif';
 import EqualizerIcon from '@material-ui/icons/Equalizer';
 import MoodIcon from '@material-ui/icons/Mood';
 import EventIcon from '@material-ui/icons/Event';
+import axios from "axios";
 
 // Displays input box with "What's happening" form
-function TweetBox() {
+function TweetBox(props) {
     const [tweetMessage, setTweetMessage] = useState("");
 
     const sendTweet = (e) => {
         e.preventDefault();
 
-    //     db.collection("posts").add({
-    //         displayName: " ",
-    //         username: "",
-    //         verified: true,
-    //         text: tweetMessage,
-    //         avatar:
-    //             ""});
-    //
-    //     setTweetMessage("");
+        axios.post('http://localhost:5000/api/posts/add', { text: tweetMessage })
+            .then(res => {
+                setTweetMessage("")
+                props.updateFeed()
+            })
     };
 
     return (

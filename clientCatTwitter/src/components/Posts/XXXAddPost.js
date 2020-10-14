@@ -26,7 +26,7 @@ const styles = {
     }
 }
 
-class AddPost extends Component {
+class XXXAddPost extends Component {
     constructor (props) {
         super(props)
         this.state = {
@@ -78,4 +78,4 @@ class AddPost extends Component {
 
 
 
-export default connect(null, { addPost })(withStyles(styles)(AddPost))
+export default connect(null, { addPost })(withStyles(styles)(XXXAddPost))
