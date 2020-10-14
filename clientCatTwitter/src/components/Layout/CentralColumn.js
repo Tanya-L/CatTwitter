@@ -44,10 +44,11 @@ class CentralColumn extends React.Component {
                             key={post.id}
                             // displayName={post.displayName}
                             username={post.username}
-                            // verified={post.verified}
+                            verified={post.verified}
                             text={post.text}
                             // avatar={post.avatar}
                             image={post.image}
+                            createdAt={post.createdAt}
                         />
                     ))}
                 </FlipMove>
