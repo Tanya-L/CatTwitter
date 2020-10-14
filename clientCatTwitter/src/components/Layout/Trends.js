@@ -5,7 +5,6 @@ import {
     TwitterShareButton,
     TwitterTweetEmbed,
 } from "react-twitter-embed";
-import SearchIcon from "@material-ui/icons/Search";
 import SettingsIcon from "@material-ui/icons/Settings";
 import SearchForm from "../Search/SearchForm";
 

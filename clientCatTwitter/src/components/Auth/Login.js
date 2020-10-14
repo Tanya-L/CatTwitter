@@ -88,8 +88,8 @@ class Login extends Component {
                         error={errors.password ? true : false}
                     />
                     <div className={classes.btnBlock}>
-                        <Button variant="outlined" type="submit">
-                            Submit
+                        <Button variant="outlined" className="sidebar__tweet" fullWidth type="submit">
+                        Log In
                         </Button>
                     </div>
                 </form>

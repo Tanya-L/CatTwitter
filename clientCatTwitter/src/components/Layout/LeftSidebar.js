@@ -37,10 +37,11 @@ function LeftSidebar() {
             <Button variant="outlined" className="sidebar__tweet" fullWidth>
                 Tweet
             </Button>
+            <div className="userPanel">
+                <UserPanel/>
+                <Route path="/login"><Login/></Route>
+            </div>
 
-            <UserPanel />
-
-            <Route path="/login"><Login/></Route>
             {/*<Profile />*/}
         </div>
     );

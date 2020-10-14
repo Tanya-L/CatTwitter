@@ -58,3 +58,9 @@
 .sidebarOption--active {
     color: var(--twitter-color);
 }
+
+.userPanel {
+    margin: 10px;
+    align-items: center;
+    color: var(--twitter-color);
+}
