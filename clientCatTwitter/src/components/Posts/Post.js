@@ -1,14 +1,12 @@
-import React, {forwardRef} from 'react'
+import React from 'react'
 import "./post.css"
 import {Avatar} from "@material-ui/core";
-import VerifiedUserIcon from "@material-ui/icons/VerifiedUser";
 import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
 import RepeatIcon from "@material-ui/icons/Repeat";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import PublishIcon from "@material-ui/icons/Publish";
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import {connect} from "react-redux";
-import {logoutUser} from "../../actions/authActions";
 
 class Post extends React.Component {
     constructor(props) {
@@ -60,7 +58,7 @@ class Post extends React.Component {
 
 const mapStateToProps = (state) => ({
     isAuthenticated: state.auth.isAuthenticated,
-    loggedInUser: state.auth.user
+    loggedInUser: state.auth.user ? state.auth.user : {_id: ''}
 })
 
 export default connect(mapStateToProps, {})(Post)

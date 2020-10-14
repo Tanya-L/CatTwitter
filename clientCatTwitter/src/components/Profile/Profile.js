@@ -60,6 +60,8 @@ class Profile extends Component {
 
         this.handleFollow = this.handleFollow.bind(this)
         this.handleUnfollow = this.handleUnfollow.bind(this)
+        this.makeFollowBtns = this.makeFollowBtns.bind(this)
+        this.makeProfileInfo = this.makeProfileInfo.bind(this)
     }
 
     componentDidMount() {
@@ -83,24 +85,18 @@ class Profile extends Component {
         this.props.unfollowUser(this.props.match.params.userId)
     }
 
-    render() {
-        const {
-            classes,
-            // loadingPosts,
-            loadingProfile,
-            list,
-            auth,
-            user,
-            profile
-        } = this.props
-        let followBtns;
+    makeFollowBtns() {
+        const {classes, loadingProfile, auth, user, profile} = this.props
         if (auth.isAuthenticated) {
-            if (
+            let isMyProfile = loadingProfile ? false : (profile._id == user._id)
+            if (isMyProfile) {
+                return (<EditIcon/>)
+            } else if (
                 user &&
                 user.following &&
                 user.following.indexOf(this.props.match.params.userId) === -1
             ) {
-                followBtns = (<div className={classes.btnBlock}>
+                return (<div className={classes.btnBlock}>
                     <Button
                         variant="outlined"
                         className={classes.btnFollow}
@@ -109,7 +105,7 @@ class Profile extends Component {
                     </Button>
                 </div>)
             } else {
-                followBtns = (<div className={classes.btnBlock}>
+                return (<div className={classes.btnBlock}>
                     <Button
                         variant="outlined"
                         className={classes.btnFollow}
@@ -120,11 +116,17 @@ class Profile extends Component {
                 </div>)
             }
         }
+    }
+
+    makeProfileInfo() {
+        const {classes, list, profile} = this.props
         let items;
         items = list && list.map(el => <Post key={el._id} post={el}/>)
-        let profileInfo
+
+        let followBtns = this.makeFollowBtns()
+
         if (profile && items) {
-            profileInfo = (
+            return (
                 <Paper className={classes.paper}>
                     <h1 className={classes.login}>{profile.login}</h1>
                     <div className={classes.email}>{profile.email}</div>
@@ -142,14 +144,16 @@ class Profile extends Component {
                             <span className={classes.detailTitle}>following</span>
                         </div>
                         {followBtns}
-                        <div>
-                            {/*if own profile = show edit, else icon hidden? and show followBtns */}
-                            <EditIcon/>
-                        </div>
                     </div>
                 </Paper>
             )
         }
+        return ''
+    }
+
+    render() {
+        const {loadingProfile} = this.props
+        let profileInfo = this.makeProfileInfo()
 
         return (
             <div className="tweet">
@@ -177,11 +181,10 @@ const mapStateToProps = (state) => ({
     user: state.auth.user
 })
 
-export default connect(mapStateToProps,
-    {
-        getPostsByUserId,
-        getUserProfile,
-        followUser,
-        unfollowUser,
-        refreshUserProfile
-    })(withStyles(styles)(Profile))
+export default connect(mapStateToProps, {
+    getPostsByUserId,
+    getUserProfile,
+    followUser,
+    unfollowUser,
+    refreshUserProfile
+})(withStyles(styles)(Profile))

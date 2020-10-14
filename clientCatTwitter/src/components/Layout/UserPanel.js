@@ -89,7 +89,7 @@ class UserPanel extends Component {
         )
 
         const authLinks = isAuthenticated && (
-            <div>You are logged in
+            <div>You are logged in as <strong>{this.props.user.email}</strong>
                 <IconButton
                     aria-owns={open ? 'menu-appbar' : undefined}
                     aria-haspopup="true"
