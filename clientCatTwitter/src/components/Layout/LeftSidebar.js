@@ -1,6 +1,5 @@
 import React from "react";
 import "./sidebar.css";
-import TwitterIcon from '@material-ui/icons/Twitter';
 import PetsIcon from '@material-ui/icons/Pets';
 import SidebarOption from "./SidebarOption";
 import HomeIcon from "@material-ui/icons/Home";
@@ -9,13 +8,11 @@ import NotificationsNoneIcon from "@material-ui/icons/NotificationsNone";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
 import ListAltIcon from "@material-ui/icons/ListAlt";
-import PermIdentityIcon from "@material-ui/icons/PermIdentity";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import {Button} from "@material-ui/core";
 import UserPanel from "./UserPanel";
-import { Route} from "react-router-dom";
+import {Route} from "react-router-dom";
 import Login from "../Auth/Login";
-import Profile from "../Profile/Profile";
 
 class LeftSidebar extends React.Component {
     render() {

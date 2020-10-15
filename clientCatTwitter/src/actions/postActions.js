@@ -3,7 +3,7 @@ import {
     ADD_POST,
     GET_POSTS,
     LOADING_POSTS
-} from '../constants'
+} from '../Constants'
 
 export const addPost = postData => dispatch => {
     axios.post('http://localhost:5000/api/posts/add', postData)

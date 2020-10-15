@@ -129,7 +129,7 @@ router.route('/unfollow')
         }
     )
 
-
+// Find one user by exact full name by email or by login
 router.route('/search')
     .post((req, res) => {
         User.findOne({
@@ -161,6 +161,32 @@ router.route('/:id')
                 }
             })
             .catch(err => console.log(err))
+    })
+
+// POST to user, updates password and bio
+// { userId, password, bio }
+router.route('/:userId')
+    .post((req, res) => {
+        User.findOne({email: req.body.email})
+            .then(user => {
+                if (!user) {
+                    return res.status(404)
+                }
+                bcrypt.genSalt(10, function (err, salt) {
+                    bcrypt.hash(req.body.password, salt, function (err, hash) {
+                        if (req.body.password.length > 0) {
+                            user.password = hash
+                        }
+                        user.bio = req.body.bio
+                        user.save()
+                            .then(_ => res.status(204))
+                            .catch(err => {
+                                console.log(err)
+                                return res.status(400)
+                            })
+                    })
+                })
+            })
     })
 
 module.exports = router

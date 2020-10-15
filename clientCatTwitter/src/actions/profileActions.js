@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {FOLLOW, GET_POSTS, GET_PROFILE, LOAD_PROFILE, LOADING_POSTS, UNFOLLOW} from '../constants'
+import {FOLLOW, GET_POSTS, GET_PROFILE, LOAD_PROFILE, LOADING_POSTS, UNFOLLOW} from '../Constants'
 
 
 export const getUserProfile = (userId) => dispatch => {
@@ -12,12 +12,11 @@ export const getUserProfile = (userId) => dispatch => {
         .catch(err => console.log(err))
 }
 
-export const refreshUserProfile = (userId) => dispatch => {
-    axios.get(`http://localhost:5000/api/users/${userId}`)
-        .then(res => dispatch({
-            type: GET_PROFILE,
-            payload: res.data
-        }))
+export const updateUserProfile = (userData, history) => dispatch => {
+    axios.post(`http://localhost:5000/api/users/${userData.id}`, {userData})
+        .then(res => {
+            history.push(`/profile/${userData.id}`)
+        })
         .catch(err => console.log(err))
 }
 
@@ -55,7 +54,7 @@ export const searchUser = (searchData, history) => dispatch => {
         .then(res => {
             history.push(`/profile/${res.data.userId}`)
         })
-        .catch(err => history.push('/search'))
+        .catch(err => history.push('/search/notfound'))
 }
 
 export const loadProfile = () => {

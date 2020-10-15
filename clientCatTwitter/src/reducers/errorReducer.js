@@ -1,4 +1,4 @@
-import { GET_ERRORS } from '../constants'
+import { GET_ERRORS } from '../Constants'
 
 const initialState = {}
 

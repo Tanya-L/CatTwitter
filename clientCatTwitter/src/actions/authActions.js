@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {CLEAR_CURRENT_USER, GET_ERRORS, SET_CURRENT_USER} from '../constants'
+import {CLEAR_CURRENT_USER, GET_ERRORS, SET_CURRENT_USER} from '../Constants'
 import setAuthHeader from '../utils/setAuthHeader'
 
 export const loginUser = (userData) => dispatch => {

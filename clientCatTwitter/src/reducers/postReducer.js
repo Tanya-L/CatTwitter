@@ -2,7 +2,7 @@ import {
     ADD_POST,
     LOADING_POSTS,
     GET_POSTS
-} from '../constants'
+} from '../Constants'
 
 const initialState = {
     list: null,

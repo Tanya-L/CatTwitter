@@ -1,30 +1,30 @@
-import {EDIT_PROFILE, GET_PROFILE, LOAD_PROFILE} from '../constants'
+import {GET_PROFILE, LOAD_PROFILE} from '../Constants'
 
 const initialState = {
     loading: false,
     user: null
 }
 
-export default function (state = initialState, action) {
+export default function (globalState = initialState, action) {
     switch (action.type) {
         case LOAD_PROFILE:
             return {
-                ...state,
+                ...globalState,
                 loading: true
             }
         case GET_PROFILE:
             return {
-                ...state,
+                ...globalState,
                 loading: false,
                 user: action.payload
             }
-        case EDIT_PROFILE:
-            return {
-                ...state,
-                loading: false,
-                user: action.payload
-            }
+        // case UPDATE_PROFILE:
+        //     return {
+        //         ...globalState,
+        //         loading: false,
+        //         user: action.payload
+        //     }
         default:
-            return state
+            return globalState
     }
 }

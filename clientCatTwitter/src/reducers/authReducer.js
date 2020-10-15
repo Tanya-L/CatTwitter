@@ -3,44 +3,44 @@ import {
     SET_CURRENT_USER,
     FOLLOW,
     UNFOLLOW
-} from '../constants'
+} from '../Constants'
 
 const initialState = {
     isAuthenticated: false,
     user: null
 }
 
-export default function (state = initialState, action) {
+export default function (globalState = initialState, action) {
     switch (action.type) {
         case CLEAR_CURRENT_USER:
             return {
-                ...state,
+                ...globalState,
                 isAuthenticated: false,
                 user: null
             }
         case SET_CURRENT_USER:
             return {
-                ...state,
+                ...globalState,
                 isAuthenticated: Object.keys(action.payload).length !== 0,
                 user: action.payload
             }
         case FOLLOW:
             return {
-                ...state,
+                ...globalState,
                 user: {
-                    ...state.user,
-                    following: [...state.user.following, action.payload]
+                    ...globalState.user,
+                    following: [...globalState.user.following, action.payload]
                 }
             }
         case UNFOLLOW:
             return {
-                ...state,
+                ...globalState,
                 user: {
-                    ...state.user,
-                    following: state.user.following.filter(item => item !== action.payload)
+                    ...globalState.user,
+                    following: globalState.user.following.filter(item => item !== action.payload)
                 }
             }
         default:
-            return state
+            return globalState
     }
 }

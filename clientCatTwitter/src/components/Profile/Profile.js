@@ -9,11 +9,9 @@ import {
     followUser,
     getPostsByUserId,
     getUserProfile,
-    refreshUserProfile,
     unfollowUser
 } from '../../actions/profileActions'
 import Post from '../Posts/Post'
-// import LoadingPosts from '../Posts/XXXLoadingPosts'
 import PostFeed from "../Posts/PostFeed";
 import EditIcon from '@material-ui/icons/Edit';
 
@@ -59,6 +57,7 @@ class Profile extends Component {
         super(props)
 
         this.handleFollow = this.handleFollow.bind(this)
+        this.handleEdit = this.handleEdit.bind(this)
         this.handleUnfollow = this.handleUnfollow.bind(this)
         this.makeFollowBtns = this.makeFollowBtns.bind(this)
         this.makeProfileInfo = this.makeProfileInfo.bind(this)
@@ -85,12 +84,22 @@ class Profile extends Component {
         this.props.unfollowUser(this.props.match.params.userId)
     }
 
+    handleEdit() {
+        this.props.history.push('/profileEdit')
+    }
+
     makeFollowBtns() {
         const {classes, loadingProfile, auth, user, profile} = this.props
         if (auth.isAuthenticated) {
-            let isMyProfile = loadingProfile ? false : (profile._id === user._id)
+            let isMyProfile = loadingProfile ? false : (profile._id == user._id)
             if (isMyProfile) {
-                return (<EditIcon/>)
+                return (
+                    <Button variant="outlined"
+                            className={classes.btnFollow}
+                            onClick={this.handleEdit}>
+                        <EditIcon/>Edit
+                    </Button>
+                )
             } else if (
                 user &&
                 user.following &&
@@ -173,14 +182,14 @@ class Profile extends Component {
     }
 }
 
-const mapStateToProps = (state) => ({
-    loadingPosts: state.post.loading,
-    list: state.post.list,
-    profile: state.profile.user,
-    loadingProfile: state.profile.loading,
-    auth: state.auth,
-    user: state.auth.user,
-    bio: state.auth.bio
+const mapStateToProps = (globalState) => ({
+    loadingPosts: globalState.post.loading,
+    list: globalState.post.list,
+    profile: globalState.profile.user,
+    loadingProfile: globalState.profile.loading,
+    auth: globalState.auth,
+    user: globalState.auth.user,
+    bio: globalState.auth.bio
 })
 
 export default connect(mapStateToProps, {
@@ -188,5 +197,4 @@ export default connect(mapStateToProps, {
     getUserProfile,
     followUser,
     unfollowUser,
-    refreshUserProfile
 })(withStyles(styles)(Profile))

@@ -108,6 +108,8 @@ class Register extends Component {
                         error={errors.password2 ? true : false}
                     />
                     <TextField
+                        multiline
+                        rows={4}
                         label="Tell more about yourself"
                         type="text"
                         name="bio"
