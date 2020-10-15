@@ -25,8 +25,7 @@ router.route('/:postId')
     .delete(
         passport.authenticate('jwt', {session: false}),
         (req, res) => {
-
-            Post.delete()
+            Post.deleteOne({_id: req.params.postId})
                 .then(post => res.json(post))
                 .catch(err => console.log(err))
         })

@@ -37,11 +37,9 @@ class ProfileEdit extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        console.log(this.props)
         // if (this.props.authenticatedUser && this.props.profile.user === null) {
         //     this.props.getUserProfile(this.props.authenticatedUser._id)
         // }
-
     }
 
     handleChange(e) {
@@ -119,7 +117,6 @@ class ProfileEdit extends React.Component {
 }
 
 const mapStateToProps = (globalState) => {
-    console.log(globalState)
     return ({
         isAuthenticated: globalState.auth.isAuthenticated,
         errors: globalState.errors,

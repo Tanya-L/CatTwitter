@@ -7,11 +7,21 @@ import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import PublishIcon from "@material-ui/icons/Publish";
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import {connect} from "react-redux";
+import {deletePost} from "../../actions/postActions";
+import {withRouter} from "react-router-dom";
 
 class Post extends React.Component {
     constructor(props) {
         super(props);
         this.setState({})
+
+        this.deleteForever = this.deleteForever.bind(this)
+    }
+
+    deleteForever(e) {
+        e.preventDefault()
+        console.log(this.props)
+        this.props.deletePost(this.props.postId, this.props.history)
     }
 
     // ({displayName, user, verified, text, image, avatar, createdAt}, ref) => {
@@ -45,9 +55,11 @@ class Post extends React.Component {
                         <RepeatIcon fontSize="small"/>
                         <FavoriteBorderIcon fontSize="small"/>
                         <PublishIcon fontSize="small"/>
+                        <a href="#" onClick={this.deleteForever}>
                         {this.props.user.id === this.props.loggedInUser._id
                             ? <DeleteForeverIcon fontSize="small"/>
                             : ""}
+                        </a>
                     </div>
                 </div>
             </div>
@@ -56,9 +68,9 @@ class Post extends React.Component {
 }
 
 
-const mapStateToProps = (state) => ({
-    isAuthenticated: state.auth.isAuthenticated,
-    loggedInUser: state.auth.user ? state.auth.user : {_id: ''}
+const mapStateToProps = (globalState) => ({
+    isAuthenticated: globalState.auth.isAuthenticated,
+    loggedInUser: globalState.auth.user ? globalState.auth.user : {_id: ''}
 })
 
-export default connect(mapStateToProps, {})(Post)
+export default connect(mapStateToProps, {deletePost})(withRouter(Post))

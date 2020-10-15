@@ -1,12 +1,8 @@
-import {
-    ADD_POST,
-    LOADING_POSTS,
-    GET_POSTS
-} from '../Constants'
+import {ADD_POST, GET_POSTS, LOADING_POSTS} from '../Constants'
 
 const initialState = {
     list: null,
-    loading: false
+    loading: false,
 }
 
 export default function (state = initialState, action) {

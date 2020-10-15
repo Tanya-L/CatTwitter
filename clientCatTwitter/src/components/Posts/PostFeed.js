@@ -58,7 +58,7 @@ class PostFeed extends Component {
                 <FlipMove>
                     {this.state.posts.map((post) => (
                         <Post
-                            key={post.id}
+                            postId={post._id}
                             // displayName={post.displayName}
                             username={post.username}
                             verified={post.verified}
