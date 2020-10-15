@@ -45,7 +45,7 @@ class Post extends React.Component {
                         <RepeatIcon fontSize="small"/>
                         <FavoriteBorderIcon fontSize="small"/>
                         <PublishIcon fontSize="small"/>
-                        {this.props.user.id == this.props.loggedInUser._id
+                        {this.props.user.id === this.props.loggedInUser._id
                             ? <DeleteForeverIcon fontSize="small"/>
                             : ""}
                     </div>

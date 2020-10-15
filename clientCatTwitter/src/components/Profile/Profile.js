@@ -88,7 +88,7 @@ class Profile extends Component {
     makeFollowBtns() {
         const {classes, loadingProfile, auth, user, profile} = this.props
         if (auth.isAuthenticated) {
-            let isMyProfile = loadingProfile ? false : (profile._id == user._id)
+            let isMyProfile = loadingProfile ? false : (profile._id === user._id)
             if (isMyProfile) {
                 return (<EditIcon/>)
             } else if (

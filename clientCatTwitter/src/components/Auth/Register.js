@@ -16,7 +16,7 @@ const styles = {
     btnBlock: {
         textAlign: 'center',
         marginBottom: 10,
-        marginTop: 20
+        marginTop: 20,
     }
 }
 
@@ -114,19 +114,7 @@ class Register extends Component {
                         value={this.state.bio}
                         onChange={this.handleChange}
                         className={classes.textField}
-                        // helperText={errors.password2 ? errors.password2 : ''}
-                        // error={errors.password2 ? true : false }
                     />
-                    {/*<TextField*/}
-                    {/*    label="Choose name"*/}
-                    {/*    type="text"*/}
-                    {/*    name="name"*/}
-                    {/*    value={this.state.name}*/}
-                    {/*    onChange={this.handleChange}*/}
-                    {/*    className={classes.textField}*/}
-                    {/*    // helperText={errors.password2 ? errors.password2 : ''}*/}
-                    {/*    // error={errors.password2 ? true : false }*/}
-                    {/*/>*/}
                     <div className={classes.btnBlock}>
                         <Button variant="outlined" type="submit">
                             Submit

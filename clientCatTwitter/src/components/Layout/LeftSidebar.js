@@ -13,15 +13,16 @@ import PermIdentityIcon from "@material-ui/icons/PermIdentity";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import {Button} from "@material-ui/core";
 import UserPanel from "./UserPanel";
-import {Route} from "react-router-dom";
+import { Route} from "react-router-dom";
 import Login from "../Auth/Login";
+import Profile from "../Profile/Profile";
 
 class LeftSidebar extends React.Component {
     render() {
         return (
             <div className="sidebar">
                 <div>
-                    <a href="/"><TwitterIcon className="sidebar__twitterIcon"/></a>
+                    {/*<a href="/"><TwitterIcon className="sidebar__twitterIcon"/></a>*/}
                     <a href="/"><PetsIcon className="sidebar__PetsIcon"/></a>
                 </div>
 
@@ -31,7 +32,9 @@ class LeftSidebar extends React.Component {
                 <SidebarOption Icon={MailOutlineIcon} text="Messages"/>
                 <SidebarOption Icon={BookmarkBorderIcon} text="Bookmarks"/>
                 <SidebarOption Icon={ListAltIcon} text="Lists"/>
-                <SidebarOption Icon={PermIdentityIcon} text="Profile"/>
+                {/*<a href="/profile/userId">*/}
+                {/*    <SidebarOption Icon={PermIdentityIcon} text="Profile"/>*/}
+                {/*    <Profile/></a>*/}
                 <SidebarOption Icon={MoreHorizIcon} text="More"/>
 
                 {/* Button -> Tweet */
@@ -44,8 +47,8 @@ class LeftSidebar extends React.Component {
                     <Route path="/login"><Login/></Route>
                 </div>
 
-                {/*<Profile />*/
-                }
+                {/*<Profile/>*/}
+
             </div>
         );
     }
