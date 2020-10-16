@@ -25,8 +25,8 @@
     "redux-thunk": "^2.3.0"
   },
   "scripts": {
-    "start": "CATTWITTER_HOST=\"localhost\" react-scripts start",
-    "start-deploy": "CATTWITTER_HOST=\"ec2-13-48-126-190.eu-north-1.compute.amazonaws.com\" react-scripts start",
+    "start": "react-scripts start",
+    "start-deploy": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
