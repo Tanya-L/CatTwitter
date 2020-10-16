@@ -69,11 +69,11 @@ class Profile extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.auth.isAuthenticated) {
-            if (prevProps.user && prevProps.user.following !== this.props.user.following) {
-                this.props.refreshUserProfile(this.props.match.params.userId)
-            }
-        }
+        // if (this.props.auth.isAuthenticated) {
+        //     if (prevProps.user && prevProps.user.following !== this.props.user.following) {
+        //         this.props.refreshUserProfile(this.props.match.params.userId)
+        //     }
+        // }
     }
 
     handleFollow() {
