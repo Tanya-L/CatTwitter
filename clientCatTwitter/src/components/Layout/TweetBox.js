@@ -7,6 +7,7 @@ import EqualizerIcon from '@material-ui/icons/Equalizer';
 import MoodIcon from '@material-ui/icons/Mood';
 import EventIcon from '@material-ui/icons/Event';
 import axios from "axios";
+import {getApiURL} from "../../Constants";
 
 // Displays input box with "What's happening" form
 function TweetBox(props) {
@@ -15,7 +16,7 @@ function TweetBox(props) {
     const sendTweet = (e) => {
         e.preventDefault();
 
-        axios.post('http://localhost:5000/api/posts/add', { text: tweetMessage })
+        axios.post(getApiURL('posts/add'), {text: tweetMessage})
             .then(res => {
                 setTweetMessage("")
                 props.updateFeed()

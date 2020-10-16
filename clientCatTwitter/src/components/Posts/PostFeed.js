@@ -3,6 +3,7 @@ import Post from './Post'
 import FlipMove from "react-flip-move";
 import TweetBox from "../Layout/TweetBox";
 import axios from "axios";
+import {getApiURL} from "../../Constants";
 
 
 class PostFeed extends Component {
@@ -23,13 +24,13 @@ class PostFeed extends Component {
     getPosts() {
         let url
         if (this.props.userFeed) {
-            url = 'http://localhost:5000/api/posts/' + this.props.userFeed
+            url = getApiURL('posts/') + this.props.userFeed
         } else {
-            url = 'http://localhost:5000/api/posts'
+            url = getApiURL('posts')
         }
         axios.get(url)
             .then(res => this.setState({posts: res.data}))
-        // axios.get('http://localhost:5000/api/posts/following')
+        // axios.get(getApiURL('posts/following')
         //     .then(res => setPosts(res.data))
     }
 

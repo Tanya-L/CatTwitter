@@ -13,3 +13,10 @@ export const GET_PROFILE = 'GET_PROFILE'
 
 export const FOLLOW = 'FOLLOW'
 export const UNFOLLOW = 'UNFOLLOW'
+
+export function getApiURL(p) {
+    return "http://" +
+        //"ec2-13-48-126-190.eu-north-1.compute.amazonaws.com" +
+        process.env.CATTWITTER_HOST +
+        ":5000/api/" + p;
+}

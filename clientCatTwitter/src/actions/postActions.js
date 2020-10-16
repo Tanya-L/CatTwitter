@@ -1,8 +1,8 @@
 import axios from 'axios'
-import {ADD_POST, DELETE_POST, GET_POSTS, LOADING_POSTS} from '../Constants'
+import {ADD_POST, GET_POSTS, getApiURL, LOADING_POSTS} from '../Constants'
 
 export const addPost = postData => dispatch => {
-    axios.post('http://localhost:5000/api/posts/add', postData)
+    axios.post(getApiURL('posts/add'), postData)
         .then(res => dispatch({
             type: ADD_POST,
             payload: res.data
@@ -11,14 +11,14 @@ export const addPost = postData => dispatch => {
 }
 
 export const deletePost = (key, history) => dispatch => {
-    axios.delete('http://localhost:5000/api/posts/' + key)
+    axios.delete(getApiURL('posts/') + key)
         .then(res => history.go(0))
         .catch(err => console.log(err))
 }
 
 export const getPosts = () => dispatch => {
     dispatch(loadPosts)
-    axios.get('http://localhost:5000/api/posts')
+    axios.get(getApiURL('posts'))
         .then(res => dispatch({
             type: GET_POSTS,
             payload: res.data
@@ -27,7 +27,7 @@ export const getPosts = () => dispatch => {
 }
 
 export const getPostsByFollowingUsers = () => dispatch => {
-    axios.get('http://localhost:5000/api/posts/following')
+    axios.get(getApiURL('posts/following'))
         .then(res => dispatch({
             type: GET_POSTS,
             payload: res.data
