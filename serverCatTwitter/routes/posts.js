@@ -6,19 +6,23 @@ router.route('/add')
     .post(
         passport.authenticate('jwt', {session: false}),
         (req, res) => {
-            const text = req.body.text.trim()
+            try {
+                const text = req.body.text.trim()
 
-            const newPost = new Post({
-                user: {
-                    id: req.user.id,
-                    login: req.user.login
-                },
-                text
-            })
+                const newPost = new Post({
+                    user: {
+                        id: req.user.id,
+                        login: req.user.login
+                    },
+                    text
+                })
 
-            newPost.save()
-                .then(post => res.json(post))
-                .catch(err => console.log(err))
+                newPost.save()
+                    .then(post => res.json(post))
+                    .catch(err => console.log(err))
+            } catch (error) {
+                return res.status(500).json({error: error.toString()})
+            }
         })
 
 router.route('/:postId')
@@ -32,10 +36,14 @@ router.route('/:postId')
 
 router.route('/')
     .get((req, res) => {
-        Post.find()
-            .sort({createdAt: -1})
-            .then(posts => res.json(posts))
-            .catch(err => console.log(err))
+        try {
+            Post.find()
+                .sort({createdAt: -1})
+                .then(posts => res.json(posts))
+                .catch(err => console.log(err))
+        } catch (error) {
+            return res.status(500).json({error: error.toString()})
+        }
     })
 
 router.route('/following')

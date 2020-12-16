@@ -8,16 +8,20 @@ const passport = require('passport')
 const users = require('./routes/users')
 const posts = require('./routes/posts')
 
+const fetch = require('node-fetch')
+const serverless = require('serverless-http')
+
+
 // setup environment
 dotenv.config()
 
 // mongo db connect
-mongoose.connect(process.env.MONGODB_URL, { useNewUrlParser: true })
+mongoose.connect(process.env.MONGODB_URL, {useNewUrlParser: true})
 
 const app = express()
 
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({extended: false}))
 app.use(cors())
 
 app.use(passport.initialize())
@@ -26,6 +30,11 @@ require('./config/passport')(passport)
 app.use('/api/users', users)
 app.use('/api/posts', posts)
 
-// run app
-const PORT = process.env.PORT || 5000
-app.listen(PORT, () => console.log(`Server is running on port ${PORT}`))
+if (process.env.MONGODB_URL.includes("localhost")) {
+    // run app
+    const PORT = process.env.PORT || 5000
+    app.listen(PORT, () => console.log(`Server is running on port ${PORT}`))
+} else {
+    //Lambda
+    module.exports.handler = serverless(app)
+}

@@ -18,8 +18,6 @@ export const UNFOLLOW = 'UNFOLLOW'
 
 
 export function getApiURL(p) {
-    return "http://" +
-        //"ec2-13-48-126-190.eu-north-1.compute.amazonaws.com" +
-        CATTWITTER_HOST +
-        ":5000/api/" + p;
+    return "https://qd0xfqszj5.execute-api.eu-north-1.amazonaws.com/prod/api/" + p;
+        // "http://" +CATTWITTER_HOST + ":5000/api/" + p;
 }

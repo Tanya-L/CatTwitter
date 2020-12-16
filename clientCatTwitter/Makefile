@@ -1,7 +1,7 @@
 .PHONY: deploy dev
 
 deploy:
-	echo 'export const CATTWITTER_HOST="ec2-13-48-126-190.eu-north-1.compute.amazonaws.com"' > src/Config.js \
+	echo 'export const CATTWITTER_HOST="s3-website.eu-north-1.amazonaws.com"' > src/Config.js \
 	&& npm start
 
 dev:

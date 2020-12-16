@@ -1,0 +1,28 @@
+service: cat-twitter
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: prod
+  region: eu-north-1
+  memorySize: 128
+  apiGateway:
+    shouldStartNameWithService: true
+  vpc:
+    securityGroupIds:
+      - sg-092de98a98b54ff05
+    subnetIds:
+      - subnet-3d906570
+  environment:
+    MONGODB_URL: "mongodb://172.31.1.101"
+functions:
+  app:
+    handler: index.handler
+    events:
+      - http:
+          path: /
+          method: ANY
+          cors: true
+      - http:
+          path: /{proxy+}
+          method: ANY
+          cors: true
