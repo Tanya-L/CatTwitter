@@ -203,7 +203,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/cat-twitter/prod/1608078827301-2020-12-16T00:33:47.301Z/cat-twitter.zip"
+                "S3Key": "serverless/cat-twitter/prod/1608086390151-2020-12-16T02:39:50.151Z/cat-twitter.zip"
               },
               "Handler": "index.handler",
               "Runtime": "nodejs12.x",
@@ -234,14 +234,14 @@
               "AppLogGroup"
             ]
           },
-          "AppLambdaVersiongVOnic1Ks1QjFAew4b4hwc8b9pJPOmfslu3QV88pE": {
+          "AppLambdaVersionjh2ZXeuGVvbJw0on8UanXQLjWxRRaIlm89KNqog": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "AppLambdaFunction"
               },
-              "CodeSha256": "0fbkE6lRs5v3sp1mxRFt7L0kkP6vKESfsv09MYzqmn0="
+              "CodeSha256": "3G5YIkt0z5hFOMlTXGFtjMX63sikunO0PTIlNpWKtIM="
             }
           },
           "ApiGatewayRestApi": {
@@ -453,7 +453,7 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1608078823885": {
+          "ApiGatewayDeployment1608086386973": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -515,7 +515,7 @@
           "AppLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "AppLambdaVersiongVOnic1Ks1QjFAew4b4hwc8b9pJPOmfslu3QV88pE"
+              "Ref": "AppLambdaVersionjh2ZXeuGVvbJw0on8UanXQLjWxRRaIlm89KNqog"
             }
           },
           "ServiceEndpoint": {
@@ -690,7 +690,7 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "AppLambdaVersiongVOnic1Ks1QjFAew4b4hwc8b9pJPOmfslu3QV88pE"
+        "versionLogicalId": "AppLambdaVersionjh2ZXeuGVvbJw0on8UanXQLjWxRRaIlm89KNqog"
       }
     },
     "configValidationMode": "warn",
@@ -711,7 +711,7 @@
     "artifact": "/Users/tanya/Project/education/CatTwitter/serverCatTwitter/.serverless/cat-twitter.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/cat-twitter/prod/1608078827301-2020-12-16T00:33:47.301Z",
+    "artifactDirectoryName": "serverless/cat-twitter/prod/1608086390151-2020-12-16T02:39:50.151Z",
     "artifact": "cat-twitter.zip"
   }
 }
