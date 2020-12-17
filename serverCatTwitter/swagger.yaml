@@ -157,7 +157,7 @@ paths:
           required: true
           type: string
       consumes:
-        - "application/json"
+        - "application/x-www-form-urlencoded"
       responses:
         200:
           description: "Successful operation"
@@ -175,7 +175,7 @@ paths:
           required: true
           type: string
       consumes:
-        - "application/json"
+        - "application/x-www-form-urlencoded"
       responses:
         200:
           description: "Successful operation"
@@ -192,7 +192,7 @@ paths:
           required: true
           type: string
       consumes:
-        - "application/json"
+        - "application/x-www-form-urlencoded"
       responses:
         200:
           description: "User found"
@@ -223,6 +223,10 @@ paths:
       summary: "Update user bio"
       description: "Update user bio and password"
       parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
         - name: body
           in: body
           schema:
@@ -333,7 +337,7 @@ definitions:
         type: array
         items:
           type: string
-        
+
   UpdateUserRequest:
     type: object
     properties:

@@ -1,0 +1,503 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "CatTwitter",
+    "description": "Simple API for CatTwitter",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Tanya L"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "paths": {
+    "/api/posts/": {
+      "get": {
+        "summary": "List posts",
+        "description": "Returns list of posts sorted by reverse creation date",
+        "responses": {
+          "200": {
+            "description": "List of post objects",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Post"
+              }
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/api/posts/following": {
+      "get": {
+        "summary": "List posts of users you're following",
+        "description": "Returns list of posts of users which are followed by the logged in user, sorted by reverse creation date",
+        "responses": {
+          "200": {
+            "description": "List of post objects",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Post"
+              }
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/api/posts/{id}": {
+      "get": {
+        "summary": "List posts of a user id",
+        "description": "Returns list of posts of a user, sorted by reverse creation date",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the user to show their posts",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of post objects",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Post"
+              }
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "delete": {
+        "summary": "Delete a post by id",
+        "description": "Deletes a post of a current logged in user by post id",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the post to delete",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success operation"
+          }
+        }
+      }
+    },
+    "/api/posts/add": {
+      "post": {
+        "summary": "Creates a post",
+        "description": "Creates a new post with logged in userid",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Post test to create",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/Post"
+            }
+          },
+          "500": {
+            "description": "Server error is reported"
+          }
+        }
+      }
+    },
+    "/api/users/register": {
+      "post": {
+        "summary": "Creates a new user",
+        "description": "Creates a new user from the registration form",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Filled user registration form",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserRegistrationRequest"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        }
+      }
+    },
+    "/api/users/login": {
+      "post": {
+        "summary": "User is logging in",
+        "description": "Creates a user session by login and password",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Post test to create",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserLoginRequest"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/UserLoginSuccess"
+            }
+          },
+          "404": {
+            "description": "User not found or bad password",
+            "schema": {
+              "$ref": "#/definitions/UserLoginError"
+            }
+          }
+        }
+      }
+    },
+    "/api/users": {
+      "get": {
+        "summary": "Get logged in user",
+        "description": "Returns all fields of currently logged in user",
+        "responses": {
+          "200": {
+            "description": "Current user",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/api/users/follow": {
+      "post": {
+        "summary": "Follow a user",
+        "description": "Current user begins following another user",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "formData",
+            "description": "User ID to follow",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/UserId"
+            }
+          }
+        }
+      }
+    },
+    "/api/users/unfollow": {
+      "post": {
+        "summary": "Unfollow a user",
+        "description": "Current user stops following another user",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "formData",
+            "description": "User ID to remove from the followed list",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/UserId"
+            }
+          }
+        }
+      }
+    },
+    "/api/users/search": {
+      "post": {
+        "summary": "Finds a user",
+        "description": "Search a user by email or login",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "responses": {
+          "200": {
+            "description": "User found",
+            "schema": {
+              "$ref": "#/definitions/UserId"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/api/users/{id}": {
+      "get": {
+        "summary": "Show a user",
+        "description": "Search a user by id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "User found",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      },
+      "post": {
+        "summary": "Update user bio",
+        "description": "Update user bio and password",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/UpdateUserRequest"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success, no data returned"
+          },
+          "400": {
+            "description": "Not accepted"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "UserLoginError": {
+      "type": "object",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "UserLoginSuccess": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "token": {
+          "type": "string"
+        }
+      }
+    },
+    "UserRegistrationRequest": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "description": "User email to serve as login",
+          "type": "string"
+        },
+        "login": {
+          "description": "User login name",
+          "type": "string"
+        },
+        "password": {
+          "description": "User password",
+          "type": "string"
+        },
+        "bio": {
+          "description": "A few words about the user",
+          "type": "string"
+        },
+        "name": {
+          "description": "User display name",
+          "type": "string"
+        }
+      }
+    },
+    "UserLoginRequest": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "Post": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "__v": {
+          "type": "integer"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "text": {
+          "type": "string"
+        },
+        "verified": {
+          "type": "boolean"
+        },
+        "user": {
+          "type": "object",
+          "$ref": "#/definitions/PostUser"
+        }
+      }
+    },
+    "PostUser": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "login": {
+          "type": "string"
+        }
+      }
+    },
+    "UserId": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        }
+      }
+    },
+    "User": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "description": "Database id for the user, exists only if user was loaded from the database",
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "login": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "bio": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "followers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "following": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "UpdateUserRequest": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "bio": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
