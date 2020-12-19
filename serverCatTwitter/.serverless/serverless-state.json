@@ -9,7 +9,7 @@
       "runtime": "nodejs12.x",
       "stage": "prod",
       "region": "eu-north-1",
-      "memorySize": 128,
+      "memorySize": 256,
       "apiGateway": {
         "shouldStartNameWithService": true
       },
@@ -204,12 +204,12 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/cat-twitter/prod/1608336454743-2020-12-19T00:07:34.743Z/cat-twitter.zip"
+                "S3Key": "serverless/cat-twitter/prod/1608339735745-2020-12-19T01:02:15.745Z/cat-twitter.zip"
               },
               "Handler": "index.handler",
               "Runtime": "nodejs12.x",
               "FunctionName": "cat-twitter-prod-app",
-              "MemorySize": 128,
+              "MemorySize": 256,
               "Timeout": 6,
               "Environment": {
                 "Variables": {
@@ -236,14 +236,14 @@
               "AppLogGroup"
             ]
           },
-          "AppLambdaVersionHTwhNFEoYkWvp1beCUXaBMJC4qBE9pLLOt4JztVyM": {
+          "AppLambdaVersionkLs5g9Mma0aA9WxFjPQ9IRfBEHzowCLdCvOhrQphk": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "AppLambdaFunction"
               },
-              "CodeSha256": "icxI1tFRDsxUk2lyyhzkkqE63rPozWCfcNdzUbYTIXA="
+              "CodeSha256": "IzYziZn+oC0lyX+i8GKgcizMk7s5/yhbdlPYuie7vPQ="
             }
           },
           "ApiGatewayRestApi": {
@@ -455,7 +455,7 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1608336448907": {
+          "ApiGatewayDeployment1608339731010": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -517,7 +517,7 @@
           "AppLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "AppLambdaVersionHTwhNFEoYkWvp1beCUXaBMJC4qBE9pLLOt4JztVyM"
+              "Ref": "AppLambdaVersionkLs5g9Mma0aA9WxFjPQ9IRfBEHzowCLdCvOhrQphk"
             }
           },
           "ServiceEndpoint": {
@@ -688,11 +688,11 @@
         ],
         "name": "cat-twitter-prod-app",
         "package": {},
-        "memory": 128,
+        "memory": 256,
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "AppLambdaVersionHTwhNFEoYkWvp1beCUXaBMJC4qBE9pLLOt4JztVyM"
+        "versionLogicalId": "AppLambdaVersionkLs5g9Mma0aA9WxFjPQ9IRfBEHzowCLdCvOhrQphk"
       }
     },
     "configValidationMode": "warn",
@@ -713,7 +713,7 @@
     "artifact": "/Users/tanya/Project/education/CatTwitter/serverCatTwitter/.serverless/cat-twitter.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/cat-twitter/prod/1608336454743-2020-12-19T00:07:34.743Z",
+    "artifactDirectoryName": "serverless/cat-twitter/prod/1608339735745-2020-12-19T01:02:15.745Z",
     "artifact": "cat-twitter.zip"
   }
 }

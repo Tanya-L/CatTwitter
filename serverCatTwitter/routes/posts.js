@@ -1,14 +1,17 @@
-const SendMsg = require("./sqs_sendmessage");
 const router = require('express').Router()
 const passport = require('passport')
 const Post = require('../models/Post')
+const {sendQueueMsg} = require("./sqs_sendmessage");
 
 router.route('/add')
     .post(
         passport.authenticate('jwt', {session: false}),
-        (req, res) => {
+        async (req, res) => {
             try {
                 const text = req.body.text.trim()
+                // if (text.indexOf("#email") >= 0) {
+                    await sendQueueMsg(req.user.email, text)
+                // }
 
                 const newPost = new Post({
                     user: {
@@ -20,9 +23,6 @@ router.route('/add')
 
                 newPost.save()
                     .then(post => {
-                        if (text.contains("#email")) {
-                            SendMsg.sendQueueMsg(req.user.email, text)
-                        }
                         return res.json(post);
                     })
                     .catch(err => console.log(err))
