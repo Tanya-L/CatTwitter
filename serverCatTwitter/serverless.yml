@@ -14,6 +14,7 @@ provider:
       - subnet-3d906570
   environment:
     MONGODB_URL: "mongodb://172.31.1.101"
+    SECRET: "mysecret"
 functions:
   app:
     handler: index.handler

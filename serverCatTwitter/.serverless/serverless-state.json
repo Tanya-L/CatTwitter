@@ -22,7 +22,8 @@
         ]
       },
       "environment": {
-        "MONGODB_URL": "mongodb://172.31.1.101"
+        "MONGODB_URL": "mongodb://172.31.1.101",
+        "SECRET": "mysecret"
       },
       "variableSyntax": "\\${([^{}:]+?(?:\\(|:)(?:[^:{}][^{}]*?)?)}",
       "versionFunctions": true,
@@ -203,7 +204,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/cat-twitter/prod/1608086390151-2020-12-16T02:39:50.151Z/cat-twitter.zip"
+                "S3Key": "serverless/cat-twitter/prod/1608336454743-2020-12-19T00:07:34.743Z/cat-twitter.zip"
               },
               "Handler": "index.handler",
               "Runtime": "nodejs12.x",
@@ -212,7 +213,8 @@
               "Timeout": 6,
               "Environment": {
                 "Variables": {
-                  "MONGODB_URL": "mongodb://172.31.1.101"
+                  "MONGODB_URL": "mongodb://172.31.1.101",
+                  "SECRET": "mysecret"
                 }
               },
               "Role": {
@@ -234,14 +236,14 @@
               "AppLogGroup"
             ]
           },
-          "AppLambdaVersionjh2ZXeuGVvbJw0on8UanXQLjWxRRaIlm89KNqog": {
+          "AppLambdaVersionHTwhNFEoYkWvp1beCUXaBMJC4qBE9pLLOt4JztVyM": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "AppLambdaFunction"
               },
-              "CodeSha256": "3G5YIkt0z5hFOMlTXGFtjMX63sikunO0PTIlNpWKtIM="
+              "CodeSha256": "icxI1tFRDsxUk2lyyhzkkqE63rPozWCfcNdzUbYTIXA="
             }
           },
           "ApiGatewayRestApi": {
@@ -453,7 +455,7 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1608086386973": {
+          "ApiGatewayDeployment1608336448907": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -515,7 +517,7 @@
           "AppLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "AppLambdaVersionjh2ZXeuGVvbJw0on8UanXQLjWxRRaIlm89KNqog"
+              "Ref": "AppLambdaVersionHTwhNFEoYkWvp1beCUXaBMJC4qBE9pLLOt4JztVyM"
             }
           },
           "ServiceEndpoint": {
@@ -690,7 +692,7 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "AppLambdaVersionjh2ZXeuGVvbJw0on8UanXQLjWxRRaIlm89KNqog"
+        "versionLogicalId": "AppLambdaVersionHTwhNFEoYkWvp1beCUXaBMJC4qBE9pLLOt4JztVyM"
       }
     },
     "configValidationMode": "warn",
@@ -711,7 +713,7 @@
     "artifact": "/Users/tanya/Project/education/CatTwitter/serverCatTwitter/.serverless/cat-twitter.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/cat-twitter/prod/1608086390151-2020-12-16T02:39:50.151Z",
+    "artifactDirectoryName": "serverless/cat-twitter/prod/1608336454743-2020-12-19T00:07:34.743Z",
     "artifact": "cat-twitter.zip"
   }
 }

@@ -1,5 +1,4 @@
-import {sendQueueMsg} from "../sqs_sendmessage";
-
+const SendMsg = require("./sqs_sendmessage");
 const router = require('express').Router()
 const passport = require('passport')
 const Post = require('../models/Post')
@@ -22,7 +21,7 @@ router.route('/add')
                 newPost.save()
                     .then(post => {
                         if (text.contains("#email")) {
-                            sendQueueMsg(req.user.email, text)
+                            SendMsg.sendQueueMsg(req.user.email, text)
                         }
                         return res.json(post);
                     })

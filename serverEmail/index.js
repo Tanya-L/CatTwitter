@@ -65,7 +65,7 @@ function receiveMessage() {
         if (err) {
             console.log("Receive Error", err);
         } else if (data.Messages) {
-            var deleteParams = {
+            const deleteParams = {
                 QueueUrl: queueURL,
                 ReceiptHandle: data.Messages[0].ReceiptHandle
             };

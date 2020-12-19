@@ -1,12 +1,8 @@
 // Load the AWS SDK for Node.js
-const AWS = require('aws-sdk');
-// Set the region
-AWS.config.update({region: 'eu-north-1'});
+const {SQS} = require('@aws-sdk/client-sqs');
+const sqs = new SQS({region: 'eu-north-1'});
 
-// Create an SQS service object
-const sqs = new AWS.SQS({apiVersion: '2012-11-05'});
-
-export function sendQueueMsg(email, text) {
+function sendQueueMsg(email, text) {
     const params = {
         // Remove DelaySeconds parameter and value for FIFO queues
         DelaySeconds: 10,
