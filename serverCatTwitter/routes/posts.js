@@ -8,6 +8,7 @@ router.route('/add')
         passport.authenticate('jwt', {session: false}),
         async (req, res) => {
             try {
+                console.info(req)
                 const text = req.body.text.trim()
                 const newPost = new Post({
                     user: {
@@ -21,7 +22,7 @@ router.route('/add')
                     .then(post => {
                         if (text.indexOf("#email") >= 0) {
                             return sendQueueMsg(req.user.email, text)
-                                .then(post => res.json(post))
+                                .then(_ => res.json(post))
                         } else {
                             return res.json(post);
                         }

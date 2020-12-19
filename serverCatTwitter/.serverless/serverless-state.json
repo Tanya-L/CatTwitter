@@ -10,19 +10,11 @@
       "stage": "prod",
       "region": "eu-north-1",
       "memorySize": 256,
+      "timeout": 8,
       "apiGateway": {
         "shouldStartNameWithService": true
       },
-      "vpc": {
-        "securityGroupIds": [
-          "sg-092de98a98b54ff05"
-        ],
-        "subnetIds": [
-          "subnet-3d906570"
-        ]
-      },
       "environment": {
-        "MONGODB_URL": "mongodb://172.31.1.101",
         "SECRET": "mysecret"
       },
       "iamRoleStatements": [
@@ -33,6 +25,15 @@
             "sqs:GetQueueAttributes"
           ],
           "Resource": "arn:aws:sqs:eu-north-1:182446513661:emailQueue"
+        },
+        {
+          "Effect": "Allow",
+          "Action": [
+            "dynamodb:GetItem",
+            "dynamodb:PutItem",
+            "dynamodb:Scan"
+          ],
+          "Resource": "arn:aws:dynamodb:eu-north-1:182446513661:table/Cat-Users"
         }
       ],
       "variableSyntax": "\\${([^{}:]+?(?:\\(|:)(?:[^:{}][^{}]*?)?)}",
@@ -175,6 +176,9 @@
                       },
                       {
                         "$ref": "$[\"service\"][\"provider\"][\"iamRoleStatements\"][0]"
+                      },
+                      {
+                        "$ref": "$[\"service\"][\"provider\"][\"iamRoleStatements\"][1]"
                       }
                     ]
                   }
@@ -193,21 +197,7 @@
                     "lambdaRole"
                   ]
                 ]
-              },
-              "ManagedPolicyArns": [
-                {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:",
-                      {
-                        "Ref": "AWS::Partition"
-                      },
-                      ":iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
-                    ]
-                  ]
-                }
-              ]
+              }
             }
           },
           "AppLambdaFunction": {
@@ -217,16 +207,15 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/cat-twitter/prod/1608342733978-2020-12-19T01:52:13.978Z/cat-twitter.zip"
+                "S3Key": "serverless/cat-twitter/prod/1608412768231-2020-12-19T21:19:28.231Z/cat-twitter.zip"
               },
               "Handler": "index.handler",
               "Runtime": "nodejs12.x",
               "FunctionName": "cat-twitter-prod-app",
               "MemorySize": 256,
-              "Timeout": 6,
+              "Timeout": 8,
               "Environment": {
                 "Variables": {
-                  "MONGODB_URL": "mongodb://172.31.1.101",
                   "SECRET": "mysecret"
                 }
               },
@@ -235,28 +224,20 @@
                   "IamRoleLambdaExecution",
                   "Arn"
                 ]
-              },
-              "VpcConfig": {
-                "SecurityGroupIds": {
-                  "$ref": "$[\"service\"][\"provider\"][\"vpc\"][\"securityGroupIds\"]"
-                },
-                "SubnetIds": {
-                  "$ref": "$[\"service\"][\"provider\"][\"vpc\"][\"subnetIds\"]"
-                }
               }
             },
             "DependsOn": [
               "AppLogGroup"
             ]
           },
-          "AppLambdaVersion6UtBtMOqTFasRycJC5aTbaFJspDp25e1EIrwEN9ek": {
+          "AppLambdaVersion6FnSHnAuDFqapwPnMOBjITGU3qsBz9kU4wc6B22XAQ": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "AppLambdaFunction"
               },
-              "CodeSha256": "W2A6lVnKJF1Gt+XisjWf/BWfYAN0cmztQ8CaFG9YPVw="
+              "CodeSha256": "gvcYWtbq5twnGcTbMcF+KQxRohM0gUF7BFRjl8O927k="
             }
           },
           "ApiGatewayRestApi": {
@@ -468,7 +449,7 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1608342729249": {
+          "ApiGatewayDeployment1608412763705": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -530,7 +511,7 @@
           "AppLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "AppLambdaVersion6UtBtMOqTFasRycJC5aTbaFJspDp25e1EIrwEN9ek"
+              "Ref": "AppLambdaVersion6FnSHnAuDFqapwPnMOBjITGU3qsBz9kU4wc6B22XAQ"
             }
           },
           "ServiceEndpoint": {
@@ -639,7 +620,8 @@
             }
           }
         }
-      }
+      },
+      "vpc": {}
     },
     "pluginsData": {},
     "functions": {
@@ -702,10 +684,10 @@
         "name": "cat-twitter-prod-app",
         "package": {},
         "memory": 256,
-        "timeout": 6,
+        "timeout": 8,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "AppLambdaVersion6UtBtMOqTFasRycJC5aTbaFJspDp25e1EIrwEN9ek"
+        "versionLogicalId": "AppLambdaVersion6FnSHnAuDFqapwPnMOBjITGU3qsBz9kU4wc6B22XAQ"
       }
     },
     "configValidationMode": "warn",
@@ -726,7 +708,7 @@
     "artifact": "/Users/tanya/Project/education/CatTwitter/serverCatTwitter/.serverless/cat-twitter.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/cat-twitter/prod/1608342733978-2020-12-19T01:52:13.978Z",
+    "artifactDirectoryName": "serverless/cat-twitter/prod/1608412768231-2020-12-19T21:19:28.231Z",
     "artifact": "cat-twitter.zip"
   }
 }

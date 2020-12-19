@@ -5,15 +5,16 @@ provider:
   stage: prod
   region: eu-north-1
   memorySize: 256
+  timeout: 8
   apiGateway:
     shouldStartNameWithService: true
-  vpc:
-    securityGroupIds:
-      - sg-092de98a98b54ff05
-    subnetIds:
-      - subnet-3d906570
+#  vpc:
+#    securityGroupIds:
+#      - sg-092de98a98b54ff05
+#    subnetIds:
+#      - subnet-3d906570
   environment:
-    MONGODB_URL: "mongodb://172.31.1.101"
+#    MONGODB_URL: "mongodb://172.31.1.101"
     SECRET: "mysecret"
   iamRoleStatements:
     - Effect: "Allow"
@@ -21,6 +22,12 @@ provider:
         - 'sqs:SendMessage'
         - 'sqs:GetQueueAttributes'
       Resource: "arn:aws:sqs:eu-north-1:182446513661:emailQueue"
+    - Effect: "Allow"
+      Action:
+        - 'dynamodb:GetItem'
+        - 'dynamodb:PutItem'
+        - 'dynamodb:Scan'
+      Resource: "arn:aws:dynamodb:eu-north-1:182446513661:table/Cat-Users"
 functions:
   app:
     handler: index.handler
