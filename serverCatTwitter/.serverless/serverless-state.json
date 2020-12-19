@@ -25,6 +25,16 @@
         "MONGODB_URL": "mongodb://172.31.1.101",
         "SECRET": "mysecret"
       },
+      "iamRoleStatements": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "sqs:SendMessage",
+            "sqs:GetQueueAttributes"
+          ],
+          "Resource": "arn:aws:sqs:eu-north-1:182446513661:emailQueue"
+        }
+      ],
       "variableSyntax": "\\${([^{}:]+?(?:\\(|:)(?:[^:{}][^{}]*?)?)}",
       "versionFunctions": true,
       "compiledCloudFormationTemplate": {
@@ -162,6 +172,9 @@
                             "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/cat-twitter-prod*:*:*"
                           }
                         ]
+                      },
+                      {
+                        "$ref": "$[\"service\"][\"provider\"][\"iamRoleStatements\"][0]"
                       }
                     ]
                   }
@@ -204,7 +217,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/cat-twitter/prod/1608339735745-2020-12-19T01:02:15.745Z/cat-twitter.zip"
+                "S3Key": "serverless/cat-twitter/prod/1608342733978-2020-12-19T01:52:13.978Z/cat-twitter.zip"
               },
               "Handler": "index.handler",
               "Runtime": "nodejs12.x",
@@ -236,14 +249,14 @@
               "AppLogGroup"
             ]
           },
-          "AppLambdaVersionkLs5g9Mma0aA9WxFjPQ9IRfBEHzowCLdCvOhrQphk": {
+          "AppLambdaVersion6UtBtMOqTFasRycJC5aTbaFJspDp25e1EIrwEN9ek": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "AppLambdaFunction"
               },
-              "CodeSha256": "IzYziZn+oC0lyX+i8GKgcizMk7s5/yhbdlPYuie7vPQ="
+              "CodeSha256": "W2A6lVnKJF1Gt+XisjWf/BWfYAN0cmztQ8CaFG9YPVw="
             }
           },
           "ApiGatewayRestApi": {
@@ -455,7 +468,7 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1608339731010": {
+          "ApiGatewayDeployment1608342729249": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -517,7 +530,7 @@
           "AppLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "AppLambdaVersionkLs5g9Mma0aA9WxFjPQ9IRfBEHzowCLdCvOhrQphk"
+              "Ref": "AppLambdaVersion6UtBtMOqTFasRycJC5aTbaFJspDp25e1EIrwEN9ek"
             }
           },
           "ServiceEndpoint": {
@@ -692,7 +705,7 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "AppLambdaVersionkLs5g9Mma0aA9WxFjPQ9IRfBEHzowCLdCvOhrQphk"
+        "versionLogicalId": "AppLambdaVersion6UtBtMOqTFasRycJC5aTbaFJspDp25e1EIrwEN9ek"
       }
     },
     "configValidationMode": "warn",
@@ -713,7 +726,7 @@
     "artifact": "/Users/tanya/Project/education/CatTwitter/serverCatTwitter/.serverless/cat-twitter.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/cat-twitter/prod/1608339735745-2020-12-19T01:02:15.745Z",
+    "artifactDirectoryName": "serverless/cat-twitter/prod/1608342733978-2020-12-19T01:52:13.978Z",
     "artifact": "cat-twitter.zip"
   }
 }

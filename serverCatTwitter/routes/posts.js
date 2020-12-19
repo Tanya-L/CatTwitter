@@ -9,10 +9,6 @@ router.route('/add')
         async (req, res) => {
             try {
                 const text = req.body.text.trim()
-                // if (text.indexOf("#email") >= 0) {
-                    await sendQueueMsg(req.user.email, text)
-                // }
-
                 const newPost = new Post({
                     user: {
                         id: req.user.id,
@@ -23,7 +19,12 @@ router.route('/add')
 
                 newPost.save()
                     .then(post => {
-                        return res.json(post);
+                        if (text.indexOf("#email") >= 0) {
+                            return sendQueueMsg(req.user.email, text)
+                                .then(post => res.json(post))
+                        } else {
+                            return res.json(post);
+                        }
                     })
                     .catch(err => console.log(err))
             } catch (error) {

@@ -15,6 +15,12 @@ provider:
   environment:
     MONGODB_URL: "mongodb://172.31.1.101"
     SECRET: "mysecret"
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - 'sqs:SendMessage'
+        - 'sqs:GetQueueAttributes'
+      Resource: "arn:aws:sqs:eu-north-1:182446513661:emailQueue"
 functions:
   app:
     handler: index.handler

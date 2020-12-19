@@ -73,7 +73,7 @@ function receiveMessage() {
                 if (err) {
                     console.log("Delete Error", err);
                 } else {
-                    sendMail(data.Email, data.MessageBody)
+                    sendMail(data.Email, data.Text)
                 }
             });
         }
