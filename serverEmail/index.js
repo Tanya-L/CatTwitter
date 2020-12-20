@@ -68,7 +68,8 @@ function receiveMessage() {
                 if (err) {
                     console.log("Delete Error", err);
                 } else {
-                    sendMail(m0.Email, m0.Text)
+                    const body = JSON.parse(m0.Body)
+                    sendMail(body.Email, body.Text)
                 }
             });
         }
