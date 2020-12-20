@@ -36,10 +36,9 @@ class Post extends React.Component {
                         <div className="post__headerText">
                             <a href={("/profile/" + this.props.ownerUserid)}>
                                 <h3>
-                                {/*{this.props.displayName} {this.props.user.name}*/}
-                                <span className="post__headerSpecial">
+                                {this.props.ownerName}
+                                @<span className="post__headerSpecial">
                                 {/*{this.props.verified && <VerifiedUserIcon className="post__badge"/>}*/}
-                                @{this.props.ownerLogin}
                                 </span>
                                 </h3>
                             </a>

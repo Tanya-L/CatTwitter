@@ -5,16 +5,12 @@ AWS.config.update({region: 'eu-north-1'});
 
 // Create an SQS service object
 const sqs = new AWS.SQS({apiVersion: '2012-11-05'});
-
+const ses = new AWS.SES({apiVersion: '2010-12-01'})
 
 function sendMail(email, text) {
     // Create sendEmail params
     const params = {
-        Destination: {
-            ToAddresses: [
-                email,
-            ]
-        },
+        Destination: {ToAddresses: [email]},
         Message: { /* required */
             Body: { /* required */
                 Text: {
@@ -34,16 +30,14 @@ function sendMail(email, text) {
     };
 
     // Create the promise and SES service object
-    const sendPromise = new AWS
-        .SES({apiVersion: '2010-12-01'})
-        .sendEmail(params).promise()
-        .then(
-            function (data) {
-                console.log("Mail sent, id=", data.MessageId);
-            }).catch(
-            function (err) {
-                console.error(err, err.stack);
-            });
+    ses.sendEmail(params)
+        .promise()
+        .then(function (data) {
+            console.log("Mail sent, id=", data.MessageId);
+        })
+        .catch(function (err) {
+            console.error(err, err.stack);
+        });
 }
 
 function receiveMessage() {

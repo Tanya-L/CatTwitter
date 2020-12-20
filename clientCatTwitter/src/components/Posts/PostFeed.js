@@ -69,6 +69,7 @@ class PostFeed extends Component {
                             createdAt={post.createdAt}
                             user={post.user}
                             ownerUserid={post.ownerUserid}
+                            ownerName={post.ownerName}
                         />
                     ))}
                 </FlipMove>
