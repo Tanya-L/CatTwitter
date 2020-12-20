@@ -55,19 +55,20 @@ function receiveMessage() {
         WaitTimeSeconds: 0
     };
 
-    sqs.receiveMessage(params, function (err, data) {
+    sqs.receiveMessage(params, function (err, receiveResult) {
         if (err) {
             console.log("Receive Error", err);
-        } else if (data.Messages) {
+        } else if (receiveResult.Messages) {
+            const m0 = receiveResult.Messages[0];
             const deleteParams = {
                 QueueUrl: queueURL,
-                ReceiptHandle: data.Messages[0].ReceiptHandle
+                ReceiptHandle: m0.ReceiptHandle
             };
-            sqs.deleteMessage(deleteParams, function (err, data) {
+            sqs.deleteMessage(deleteParams, function (err, deleteResult) {
                 if (err) {
                     console.log("Delete Error", err);
                 } else {
-                    sendMail(data.Email, data.Text)
+                    sendMail(m0.Email, m0.Text)
                 }
             });
         }
