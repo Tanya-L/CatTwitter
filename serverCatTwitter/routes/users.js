@@ -16,12 +16,11 @@ router.route('/register')
         }
 
         User.findByEmail(req.body.email)
-            .then(userResult => {
-                if (userResult.Item) {
-                    errors.email = 'Email was used!'
-                    return res.status(404).json(errors)
-                }
-
+            .then(_ => {
+                errors.email = 'Email was used!'
+                return res.status(404).json(errors)
+            })
+            .catch(_ => {
                 bcrypt.genSalt(10, function (err, salt) {
                     bcrypt.hash(req.body.password, salt, function (err, hash) {
                         const newUser = new User(
@@ -54,12 +53,15 @@ router.route('/login')
                 bcrypt.compare(req.body.password, user.password)
                     .then(isMatch => {
                         if (isMatch) {
-                            jwt.sign({id: user._id}, process.env.SECRET, {expiresIn: '1d'}, function (err, token) {
-                                return res.json({
-                                    success: true,
-                                    token: token
+                            jwt.sign({id: user.id},
+                                process.env.SECRET,
+                                {expiresIn: '1d'},
+                                function (err, token) {
+                                    return res.json({
+                                        success: true,
+                                        token: token
+                                    })
                                 })
-                            })
                         } else {
                             errors.password = 'Password is incorrect'
                             return res.status(404).json(errors)
@@ -75,7 +77,7 @@ router.route('/login')
 router.route('/')
     .get(passport.authenticate('jwt', {session: false}), (req, res) => {
         res.json({
-            _id: req.user._id,
+            id: req.user.id,
             email: req.user.email,
             login: req.user.login,
             followers: req.user.followers,
@@ -92,8 +94,7 @@ router.route('/follow')
             User.findById(req.user.id)
                 .then(({Item: followingUser}) => {
                     // Read user who follows, update
-                    let user = new User()
-                    Object.assign(user, followingUser)
+                    let user = User.from(followingUser)
                     user.following.push(req.body.userId);
                     return user.save()
                         .then(_ => {
@@ -102,8 +103,7 @@ router.route('/follow')
                         })
                         .then(({Item: followedUser}) => {
                             // Update user who is followed
-                            let user = new User()
-                            Object.assign(user, followedUser)
+                            let user = User.from(followedUser)
                             user.followers.push(req.user.id);
                             return user.save()
                                 .then(user => res.json({userId: req.body.userId}))
@@ -120,8 +120,7 @@ router.route('/unfollow')
             User.findById(req.user.id)
                 .then(({Item: followingUser}) => {
                     // Read user who follows, update
-                    let user = new User()
-                    Object.assign(user, followingUser)
+                    let user = User.from(followingUser)
                     user.removeFollowing(req.body.userId)
                     user.save()
                         .then(_ => {
@@ -129,8 +128,7 @@ router.route('/unfollow')
                             return User.findById(req.body.userId)
                         })
                         .then(({Item: followedUser}) => {
-                            let user = new User()
-                            Object.assign(user, followedUser)
+                            let user = User.from(followedUser)
                             user.removeFollower(req.user.id);
                             return user.save()
                                 .then(user => res.json({userId: req.body.userId}))
@@ -153,7 +151,7 @@ router.route('/search')
                         || i.login.indexOf(req.body.text) >= 0
                 )
                 if (items2.length > 0) {
-                    return res.json({userId: items2[0]._id})
+                    return res.json({userId: items2[0].id})
                 }
                 return res.status(404).json({msg: 'User not found'})
             })
@@ -168,7 +166,7 @@ router.route('/:id')
         User.findById(req.params.id)
             .then(({Item: user}) => {
                 return res.json({
-                    _id: user._id,
+                    id: user.id,
                     email: user.email,
                     login: user.login,
                     followers: user.followers,
@@ -189,9 +187,7 @@ router.route('/:userId')
     .post((req, res) => {
         User.findByEmail(req.body.email)
             .then(({Item: userFound}) => {
-                let user = new User()
-                Object.assign(user, userFound)
-
+                let user = User.from(userFound)
                 bcrypt.genSalt(10, function (err, salt) {
                     bcrypt.hash(req.body.password, salt, function (err, hash) {
                         if (req.body.password.length > 0) {

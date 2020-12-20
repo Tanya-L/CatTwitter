@@ -38,7 +38,7 @@ class ProfileEdit extends React.Component {
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         // if (this.props.authenticatedUser && this.props.profile.user === null) {
-        //     this.props.getUserProfile(this.props.authenticatedUser._id)
+        //     this.props.getUserProfile(this.props.authenticatedUser.id)
         // }
     }
 
@@ -48,10 +48,10 @@ class ProfileEdit extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault()
-        if (!this.props.authenticatedUser._id) { return; }
+        if (!this.props.authenticatedUser.id) { return; }
 
         let profileData = {
-            userId: this.props.authenticatedUser._id,
+            userId: this.props.authenticatedUser.id,
             password: this.state.password,
             bio: this.state.bio,
         }

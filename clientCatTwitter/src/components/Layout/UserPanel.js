@@ -113,7 +113,7 @@ class UserPanel extends Component {
                     onClose={this.handleClose}
                 >
                     <MenuItem onClick={this.handleClose}>
-                        <Link to={`/profile/${user._id}`}>Profile</Link>
+                        <Link to={`/profile/${user.id}`}>Profile</Link>
                     </MenuItem>
                     <MenuItem>
                         <Link to="/#" onClick={this.handleLogout}>Logout</Link>

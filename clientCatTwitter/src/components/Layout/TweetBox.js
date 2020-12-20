@@ -36,13 +36,13 @@ function TweetBox(props) {
                     />
                 </div>
                 <div className="tweetBox__footer">
-                    <dib className="tweetBox__icons">
+                    <div className="tweetBox__icons">
                         <ImageIcon/>
                         <GifIcon/>
                         <EqualizerIcon/>
                         <MoodIcon/>
                         <EventIcon/>
-                    </dib>
+                    </div>
                     <Button
                         onClick={sendTweet}
                         type="submit"

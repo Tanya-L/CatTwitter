@@ -1,6 +1,6 @@
 // Load the AWS SDK for Node.js
 const AWS = require('aws-sdk');
-const sqs = new AWS.SQS();
+const sqs = new AWS.SQS({apiVersion: '2012-11-05'});
 
 async function sendQueueMsg(email, text) {
     const m = {
@@ -13,7 +13,9 @@ async function sendQueueMsg(email, text) {
         QueueUrl: "https://sqs.eu-north-1.amazonaws.com/182446513661/emailQueue"
     };
 
-    return sqs.sendMessage(params);
+    console.info("Sending!")
+    console.info(params)
+    return sqs.sendMessage(params).promise();
 }
 
 exports.sendQueueMsg = sendQueueMsg;

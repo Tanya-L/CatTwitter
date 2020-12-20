@@ -1,11 +1,11 @@
 const AWS = require("aws-sdk")
 const dynamoDb = new AWS.DynamoDB.DocumentClient()
-const { v4: uuidv4 } = require("uuid")
+const {v4: uuidv4} = require("uuid")
 
 const TABLE_NAME = "Cat-Users";
 
 class User {
-    _id;
+    id;
     email;
     login;
     password;
@@ -14,8 +14,14 @@ class User {
     followers;
     following;
 
-    constructor(_id, email, login, password, bio, name) {
-        this._id = _id;
+    static from(o) {
+        let u = new User()
+        Object.assign(u, o)
+        return u
+    }
+
+    constructor(id, email, login, password, bio, name) {
+        this.id = id;
         this.email = email;
         this.login = login;
         this.password = password;
@@ -52,7 +58,7 @@ class User {
     createJsonDict() {
         return {
             "email": this.email,
-            "_id": this._id,
+            "id": this.id,
             "login": this.login,
             "password": this.password,
             "bio": this.bio,
@@ -63,19 +69,35 @@ class User {
     }
 
     static findByEmail(value) {
-        const params = {
-            Key: {
-                "email": value
-            },
-            TableName: TABLE_NAME
-        };
-        return dynamoDb.get(params).promise();
+        // const params = {
+        //     Key: {
+        //         "email": value
+        //     },
+        //     TableName: TABLE_NAME
+        // };
+        // return dynamoDb.get(params).promise();
+        // const params = {
+        //     TableName: TABLE_NAME,
+        //     KeyConditionExpression: "email = :x",
+        //     ExpressionAttributeValues: {
+        //         ":x": value
+        //     }
+        // }
+        // return dynamoDb.query(params).promise()
+        return this.scan()
+            .then(({Items: elements}) => {
+                const filtered = elements.filter(e => e.email === value)
+                if (filtered.length > 0) {
+                    return {Item: filtered[0]};
+                }
+                return Promise.reject("Not found")
+            })
     }
 
     static findById(value) {
         const params = {
             Key: {
-                "_id": value
+                "id": value
             },
             TableName: TABLE_NAME
         };
@@ -93,7 +115,7 @@ class User {
         }
     }
 
-    removeFollower(id) {
+    removeFollower(userId) {
         const i = this.followers.indexOf(userId)
         if (i !== -1) {
             this.followers.splice(i, 1)

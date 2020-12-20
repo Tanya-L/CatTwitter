@@ -34,12 +34,12 @@ class Post extends React.Component {
                 <div className="post__body">
                     <div className="post__header">
                         <div className="post__headerText">
-                            <a href={("/profile/" + this.props.user.id)}>
+                            <a href={("/profile/" + this.props.ownerUserid)}>
                                 <h3>
-                                {this.props.displayName} {this.props.user.name}
+                                {/*{this.props.displayName} {this.props.user.name}*/}
                                 <span className="post__headerSpecial">
                                 {/*{this.props.verified && <VerifiedUserIcon className="post__badge"/>}*/}
-                                @{this.props.user.login}
+                                @{this.props.ownerLogin}
                                 </span>
                                 </h3>
                             </a>
@@ -56,7 +56,7 @@ class Post extends React.Component {
                         <FavoriteBorderIcon fontSize="small"/>
                         <PublishIcon fontSize="small"/>
                         <a href="#" onClick={this.deleteForever}>
-                        {this.props.user.id === this.props.loggedInUser._id
+                        {this.props.ownerUserid === this.props.loggedInUser.id
                             ? <DeleteForeverIcon fontSize="small"/>
                             : ""}
                         </a>
@@ -70,7 +70,7 @@ class Post extends React.Component {
 
 const mapStateToProps = (globalState) => ({
     isAuthenticated: globalState.auth.isAuthenticated,
-    loggedInUser: globalState.auth.user ? globalState.auth.user : {_id: ''}
+    loggedInUser: globalState.auth.user ? globalState.auth.user : {id: ''}
 })
 
 export default connect(mapStateToProps, {deletePost})(withRouter(Post))

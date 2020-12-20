@@ -91,7 +91,7 @@ class Profile extends Component {
     makeFollowBtns() {
         const {classes, loadingProfile, auth, user, profile} = this.props
         if (auth.isAuthenticated) {
-            let isMyProfile = loadingProfile ? false : (profile._id == user._id)
+            let isMyProfile = loadingProfile ? false : (profile.id == user.id)
             if (isMyProfile) {
                 return (
                     <Button variant="outlined"
@@ -130,7 +130,7 @@ class Profile extends Component {
     makeProfileInfo() {
         const {classes, list, profile} = this.props
         let items;
-        items = list && list.map(el => <Post key={el._id} post={el}/>)
+        items = list && list.map(el => <Post key={el.id} post={el}/>)
 
         let followBtns = this.makeFollowBtns()
 

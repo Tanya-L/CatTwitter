@@ -27,7 +27,16 @@ provider:
         - 'dynamodb:GetItem'
         - 'dynamodb:PutItem'
         - 'dynamodb:Scan'
+        - 'dynamodb:Query'
       Resource: "arn:aws:dynamodb:eu-north-1:182446513661:table/Cat-Users"
+    - Effect: "Allow"
+      Action:
+        - 'dynamodb:GetItem'
+        - 'dynamodb:PutItem'
+        - 'dynamodb:Scan'
+        - 'dynamodb:Query'
+        - 'dynamodb:DeleteItem'
+      Resource: "arn:aws:dynamodb:eu-north-1:182446513661:table/Cat-Posts"
 functions:
   app:
     handler: index.handler

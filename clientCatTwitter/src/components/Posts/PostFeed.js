@@ -59,7 +59,7 @@ class PostFeed extends Component {
                 <FlipMove>
                     {this.state.posts.map((post) => (
                         <Post
-                            postId={post._id}
+                            postId={post.id}
                             // displayName={post.displayName}
                             username={post.username}
                             verified={post.verified}
@@ -68,6 +68,7 @@ class PostFeed extends Component {
                             image={post.image}
                             createdAt={post.createdAt}
                             user={post.user}
+                            ownerUserid={post.ownerUserid}
                         />
                     ))}
                 </FlipMove>
